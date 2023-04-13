@@ -61,18 +61,17 @@ class LojaListagem extends TPage
         $this->datagrid->style = 'width: 100%';
         // $this->datagrid->enablePopover('Popover', 'Hi <b> {name} </b>');
         
-
         // creates the datagrid columns
         $column_id = new TDataGridColumn('id', 'Id', 'left');
         $column_nome = new TDataGridColumn('nome', 'Nome', 'left');
         $column_link_afiliado = new TDataGridColumn('link_afiliado', 'Link Afiliado', 'left');
         $column_logo = new TDataGridColumn('logo', 'Logo', 'left');
-        $column_logo->setTransformer( function($logo, $object, $row){
-            $obj = new TImage($logo);
+        $column_logo->setTransformer( function($logo){
+            $obj = new TImage('../'.$logo);
             $obj->style = 'max-width: 140px';
             return $obj;
+            //return TImage::createImage($logo, ['max-width' => '140px']);
         } );
-
 
         // add the columns to the DataGrid
         $this->datagrid->addColumn($column_id);
@@ -81,10 +80,10 @@ class LojaListagem extends TPage
         $this->datagrid->addColumn($column_logo);
 
         
-        //$action1 = new TDataGridAction(['LojaForm', 'onEdit'], ['id'=>'{id}']);
+        $action1 = new TDataGridAction(['LojaForm', 'onEdit'], ['id'=>'{id}']);
         $action2 = new TDataGridAction([$this, 'onDelete'], ['id'=>'{id}']);
         
-        //$this->datagrid->addAction($action1, _t('Edit'),   'far:edit blue');
+        $this->datagrid->addAction($action1, _t('Edit'),   'far:edit blue');
         $this->datagrid->addAction($action2 ,_t('Delete'), 'far:trash-alt red');
         
         // create the datagrid model
@@ -128,7 +127,7 @@ class LojaListagem extends TPage
         $dropdown->addAction( _t('Save as PDF'), new TAction([$this, 'onExportPDF'], ['register_state' => 'false', 'static'=>'1']), 'far:file-pdf red' );
         $panel->addHeaderWidget( $dropdown );
         
-        //$panel->addHeaderActionLink( _t('New'),  new TAction(['LojaForm', 'onEdit'], ['register_state' => 'false']), 'fa:plus green' );
+        $panel->addHeaderActionLink( _t('New'),  new TAction(['LojaForm', 'onEdit'], ['register_state' => 'false']), 'fa:plus green' );
         
         // vertical box container
         $container = new TVBox;

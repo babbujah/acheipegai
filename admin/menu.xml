@@ -121,8 +121,17 @@
     </menu>
   </menuitem>
   <menuitem label="Lojas">
-    <action>LojaListagem</action>
     <icon>fas:building fa-fw</icon>
+    <menu>
+      <menuitem label="Listagem de lojas">
+        <action>LojaListagem</action>
+        <icon>fas:building fa-fw</icon>
+      </menuitem>
+      <menuitem label="Cadastro de lojas">
+        <action>LojaForm</action>
+        <icon>far:building fa-fw</icon>
+      </menuitem>
+    </menu>
   </menuitem>
   <menuitem label="Logout">
     <action>LoginForm#method=onLogout#static=1</action>

@@ -141,4 +141,18 @@ class TImage extends TElement
             parent::__construct('i');
         }
     }
+    
+    /**
+    * Método estático para geração de imagem legado
+    * @param $logo path da imagem a ser transformada
+    * @param $properties propriedades de estilização da imagem
+    * @author brunosilva
+    **/
+    public static function createImage($logo, $properties = []){
+        
+        $image = new TImage($logo);
+        foreach($properties as $key => $property){
+            $image->{$key} = $property;
+        }
+    }
 }
