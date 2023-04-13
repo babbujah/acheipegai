@@ -542,24 +542,25 @@
 						<div class="col-md-6 col-lg-9 mb-5 mb-md-0">
 							<h5 class="text-4 text-color-light mb-3">LOJAS PARCEIRAS</h5>
 							<ul class="list list-unstyled list-inline mb-0">
-								<li class="list-inline-item"><a href="#" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">jeans</a></li>
-								<li class="list-inline-item"><a href="#" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">shoes</a></li>
-								<li class="list-inline-item"><a href="#" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">bag</a></li>
-								<li class="list-inline-item"><a href="#" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">jeasn</a></li>
-								<li class="list-inline-item"><a href="#" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">classic</a></li>
-								<li class="list-inline-item"><a href="#" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">black</a></li>
-								<li class="list-inline-item"><a href="#" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">bag</a></li>
-								<li class="list-inline-item"><a href="#" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">white</a></li>
-								<li class="list-inline-item"><a href="#" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">bag</a></li>
-								<li class="list-inline-item"><a href="#" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">bag</a></li>
-								<li class="list-inline-item"><a href="#" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">shoes</a></li>
-								<li class="list-inline-item"><a href="#" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">bag</a></li>
-								<li class="list-inline-item"><a href="#" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">jeans</a></li>
-								<li class="list-inline-item"><a href="#" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">shoes</a></li>
-								<li class="list-inline-item"><a href="#" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">white</a></li>
-								<li class="list-inline-item"><a href="#" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">black</a></li>
-								<li class="list-inline-item"><a href="#" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">white</a></li>
-								<li class="list-inline-item"><a href="#" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">shoes</a></li>
+								<li class="list-inline-item"><a href="https://amzn.to/3KYDhlN" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">Amazon</a></li>
+								<li class="list-inline-item"><a href="https://www.magazinevoce.com.br/magazineacheiPEGAi/" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">Magazine Luíza</a></li>
+								<li class="list-inline-item"><a href="#" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">Americanas</a></li>
+								<li class="list-inline-item"><a href="https://shope.ee/9KBtMCWH69" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">Shopee</a></li>
+								<li class="list-inline-item"><a href="https://tidd.ly/414HFFb" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">Casas Bahia</a></li>
+								<li class="list-inline-item"><a href="https://tidd.ly/3mvkUvc" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">Aliexpress</a></li>
+								<li class="list-inline-item"><a href="https://click.linksynergy.com/deeplink?id=wxiLV7pbyMs&mid=43984&murl=https%3A%2F%2Fwww.netshoes.com.br%2F" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">Netshoes</a></li>
+								<li class="list-inline-item"><a href="https://click.linksynergy.com/deeplink?id=wxiLV7pbyMs&mid=43464&murl=https%3A%2F%2Fwww.boticario.com.br%2F" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">Boticário</a></li>
+								<li class="list-inline-item"><a href="https://click.linksynergy.com/deeplink?id=wxiLV7pbyMs&mid=45560&murl=https%3A%2F%2Fwww.eudora.com.br%2F" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">Eudora</a></li>
+								<li class="list-inline-item"><a href="https://click.linksynergy.com/deeplink?id=wxiLV7pbyMs&mid=43985&murl=https%3A%2F%2Fwww.zattini.com.br%2F" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">Zattini</a></li>
+								<li class="list-inline-item"><a href="https://click.linksynergy.com/deeplink?id=wxiLV7pbyMs&mid=41720&murl=https%3A%2F%2Fwww.iplace.com.br%2F" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">loja iPlace</a></li>
+								<li class="list-inline-item"><a href="https://tidd.ly/3KWY3lx" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">Extra</a></li>
+								<li class="list-inline-item"><a href="https://tidd.ly/3GIOPqN" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">Nike</a></li>
+								<li class="list-inline-item"><a href="https://tidd.ly/40Y3qXn" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">Tricae</a></li>
+								<li class="list-inline-item"><a href="https://click.linksynergy.com/deeplink?id=wxiLV7pbyMs&mid=46154&murl=https%3A%2F%2Fwww.rihappy.com.br%2F" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">Ri Happy</a></li>
+								<li class="list-inline-item"><a href="https://tidd.ly/3zSSIFP" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">Ponto Frio</a></li>
+								<li class="list-inline-item"><a href="https://click.linksynergy.com/deeplink?id=wxiLV7pbyMs&mid=42158&murl=https%3A%2F%2Fwww.compracerta.com.br%2F" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">Compra Certa</a></li>
+								<li class="list-inline-item"><a href="https://tidd.ly/3GHZEJL" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">Dafiti</a></li>
+								<li class="list-inline-item"><a href="https://tidd.ly/3MFzRWc" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">Kanui</a></li>
 							</ul>
 						</div>
 						
