@@ -1,4 +1,9 @@
-<?php ?>
+<?php 
+	$response = file_get_contents('http://localhost/proc/acheipegai/admin/rest.php?class=LojaRestService&method=handle');
+	
+	$lojas = json_decode($response)->data;
+	
+?>
 
 <!DOCTYPE html>
 <html>
@@ -52,7 +57,6 @@
 
 	</head>
 	<body data-plugin-page-transition>
-
 		<div class="body">
 			<div class="notice-top-bar bg-primary" data-sticky-start-at="180">
 				<button class="hamburguer-btn hamburguer-btn-light notice-top-bar-close m-0 active" data-set-active="false">
@@ -542,6 +546,13 @@
 						<div class="col-md-6 col-lg-9 mb-5 mb-md-0">
 							<h5 class="text-4 text-color-light mb-3">LOJAS PARCEIRAS</h5>
 							<ul class="list list-unstyled list-inline mb-0">
+								<?
+									foreach( $lojas as $loja ){
+										echo '<li class="list-inline-item"><a href="'.$loja->link_afiliado.'" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">'.$loja->nome.'</a></li>';
+									}
+								?>
+								
+								<!-- 
 								<li class="list-inline-item"><a href="https://amzn.to/3KYDhlN" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">Amazon</a></li>
 								<li class="list-inline-item"><a href="https://www.magazinevoce.com.br/magazineacheiPEGAi/" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">Magazine Luíza</a></li>
 								<li class="list-inline-item"><a href="#" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">Americanas</a></li>
@@ -561,6 +572,7 @@
 								<li class="list-inline-item"><a href="https://click.linksynergy.com/deeplink?id=wxiLV7pbyMs&mid=42158&murl=https%3A%2F%2Fwww.compracerta.com.br%2F" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">Compra Certa</a></li>
 								<li class="list-inline-item"><a href="https://tidd.ly/3GHZEJL" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">Dafiti</a></li>
 								<li class="list-inline-item"><a href="https://tidd.ly/3MFzRWc" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">Kanui</a></li>
+								-->
 							</ul>
 						</div>
 						
