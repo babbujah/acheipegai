@@ -1,1 +1,5 @@
+# Temp files
 admin/tmp
+
+# database
+admin/app/database
