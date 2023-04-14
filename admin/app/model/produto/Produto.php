@@ -1,6 +1,9 @@
 <?php
 /**
-* Produto Active Record
+ * Produto Active Record
+ * @version    1.0
+ * @package    model/produto
+ * @author     brunosilva
 **/
 class Produto extends TRecord{
     const TABLENAME = 'produto';

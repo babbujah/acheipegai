@@ -1,7 +1,9 @@
 <?php
 /**
 * Categoria Active Record
-* @author brunosilva
+* @version    1.0
+* @package    model/loja
+* @author     brunosilva
 **/
 class Categoria extends TRecord{
     const TABLENAME = 'categoria';
