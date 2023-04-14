@@ -16,5 +16,7 @@
 /admin/tmp
 !/tmp/.htaccess
 /app/output/
+admin/app/output/
+admin/vendor/
 !/app/output/.gitignore
 env.php
