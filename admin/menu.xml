@@ -131,6 +131,22 @@
         <action>LojaForm</action>
         <icon>far:building fa-fw</icon>
       </menuitem>
+      <menuitem label="Listagem de categorias">
+        <action>CategoriaList</action>
+        <icon>fas:atlas fa-fw</icon>
+      </menuitem>
+      <menuitem label="Cadastro de categorias">
+        <action>CategoriaForm</action>
+        <icon>fas:atlas fa-fw</icon>
+      </menuitem>
+      <menuitem label="Listagem de produtos">
+        <action>ProdutoList</action>
+        <icon>fas:shopping-bag fa-fw</icon>
+      </menuitem>
+      <menuitem label="Cadastro de produtos">
+        <action>ProdutoForm</action>
+        <icon>fas:shopping-bag fa-fw</icon>
+      </menuitem>
     </menu>
   </menuitem>
   <menuitem label="Logout">
