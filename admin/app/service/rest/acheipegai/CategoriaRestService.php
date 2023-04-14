@@ -2,14 +2,13 @@
 /**
  * Loja REST service
  */
-class LojaRestService extends AdiantiRecordService
+class CategoriaRestService extends AdiantiRecordService
 {
     const DATABASE      = 'acheipegai';
-    const ACTIVE_RECORD = 'Loja';
-    const ATTRIBUTES    = ['id', 'nome', 'link_afiliado', 'logo'];
+    const ACTIVE_RECORD = 'Categoria';
+    const ATTRIBUTES    = ['id', 'nome'];
 
-	    
-    /**
+	/**
      * Delete an Active Record object from the database
      * @param [$id]     HTTP parameter
      */
