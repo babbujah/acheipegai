@@ -27,14 +27,14 @@ class Produto extends TRecord{
         parent::addAttribute('descricao');
         parent::addAttribute('preco');
         parent::addAttribute('foto');
-        parent::addAttribute('categoria_id');
-        parent::addAttribute('loja_id');
-        parent::addAttribute('data_criacao');
+        parent::addAttribute('id_categoria');
+        parent::addAttribute('id_loja');
+        parent::addAttribute('data_criado');
     }
     
     public function get_categoria(){
         if(empty($this->categoria)){
-            $this->categoria = new Categoria($this->categoria_id);
+            $this->categoria = new Categoria($this->id_categoria);
             
         }
         
@@ -43,7 +43,7 @@ class Produto extends TRecord{
     
     public function get_loja(){
         if(empty($this->loja)){
-            $this->loja = new Loja($this->loja_id);
+            $this->loja = new Loja($this->id_loja);
             
         }
         

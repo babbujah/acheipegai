@@ -8,7 +8,7 @@ class Categoria extends TRecord{
     const PRIMARYKEY = 'id';
     const IDPOLICE = 'serial';
     
-    $private $nome;
+    private $nome;
     
     /**
     * Método Construtor
