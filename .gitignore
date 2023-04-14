@@ -17,6 +17,3 @@
 !/tmp/.htaccess
 /app/output/
 !/app/output/.gitignore
-
-# database
-admin/app/database
