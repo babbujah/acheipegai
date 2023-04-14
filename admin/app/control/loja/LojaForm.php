@@ -26,14 +26,14 @@ class LojaForm extends TPage
         $nome = new TEntry('nome');
         $link_afiliado = new TEntry('link_afiliado');
         //$logo = new TEntry('logo');
-        $logo = new TFile('logo');
-        $logo->setAllowedExtensions(['png', 'jpg']);
+        $logo_nova = new TFile('logo_nova');
+        $logo_nova->setAllowedExtensions(['png', 'jpg']);
         
         // add the fields
         $this->form->addFields( [ new TLabel('Id') ], [ $id ] );
         $this->form->addFields( [ new TLabel('Nome') ], [ $nome ] );
         $this->form->addFields( [ new TLabel('Link Afiliado') ], [ $link_afiliado ] );
-        $this->form->addFields( [ new TLabel('Logo') ], [ $logo ] );
+        $this->form->addFields( [ new TLabel('Logo') ], [ $logo_nova ] );
 
 
 
@@ -41,7 +41,7 @@ class LojaForm extends TPage
         $id->setSize('100%');
         $nome->setSize('100%');
         $link_afiliado->setSize('100%');
-        $logo->setSize('100%');
+        $logo_nova->setSize('100%');
 
 
 
@@ -96,10 +96,11 @@ class LojaForm extends TPage
             //$object->logo = ./img/lojas/'.$data->nome.'.png';
             $object->store(); // save the object
             
-            if(!empty($data->logo)){
-                rename('tmp/'.$data->logo, '../img/lojas/'.$object->id.'.png');
+            if(!empty($data->logo_nova)){
+                rename('tmp/'.$data->logo_nova, '../img/lojas/'.$object->id.'.png');
                 $object->logo = './img/lojas/'.$object->id.'.png';
-                $object->store();               
+                $object->store();
+                unset($data->logo_nova);            
             }
             
             // get the generated id

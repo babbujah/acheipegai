@@ -67,6 +67,10 @@ class LojaListagem extends TPage
         $column_link_afiliado = new TDataGridColumn('link_afiliado', 'Link Afiliado', 'left');
         $column_logo = new TDataGridColumn('logo', 'Logo', 'left');
         $column_logo->setTransformer( function($logo){
+            if(empty($logo)){
+                return "";
+            }
+            
             $obj = new TImage('../'.$logo);
             $obj->style = 'max-width: 140px';
             return $obj;
