@@ -1,5 +1,6 @@
-<?php 
-	$response = file_get_contents('http://localhost/proc/acheipegai/admin/rest.php?class=LojaRestService&method=handle');
+<?php
+	require_once('env.php');
+	$response = file_get_contents(URL_BASE.'admin/rest.php?class=LojaRestService&method=handle');
 	
 	$lojas = json_decode($response)->data;
 	
@@ -546,7 +547,7 @@
 						<div class="col-md-6 col-lg-9 mb-5 mb-md-0">
 							<h5 class="text-4 text-color-light mb-3">LOJAS PARCEIRAS</h5>
 							<ul class="list list-unstyled list-inline mb-0">
-								<?
+								<?php
 									foreach( $lojas as $loja ){
 										echo '<li class="list-inline-item"><a href="'.$loja->link_afiliado.'" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">'.$loja->nome.'</a></li>';
 									}

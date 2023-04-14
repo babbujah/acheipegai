@@ -17,3 +17,4 @@
 !/tmp/.htaccess
 /app/output/
 !/app/output/.gitignore
+env.php
