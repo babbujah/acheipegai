@@ -1,5 +1,22 @@
-# Temp files
-admin/tmp
+# Ignore all directories, and all sub-directories, and it's contents:
+# Ignore * all files in directories
+# Ignore **/ alll subdirectories 
+
+# VsCode files
+.vscode/
+
+# Eclipse files
+/.settings/
+/.vscode/
+/.project
+/.buildpath
+
+# arquivos
+/tmp/
+/admin/tmp
+!/tmp/.htaccess
+/app/output/
+!/app/output/.gitignore
 
 # database
 admin/app/database
