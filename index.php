@@ -1,6 +1,6 @@
 <?php
 	require_once('env.php');
-	$response = file_get_contents(URL_BASE.'admin/rest.php?class=LojaRestService&method=handle');
+	$response = file_get_contents(URL_BASE.'admin/rest.php?class=LojaRestService&method=handle&order=nome');
 	
 	$lojas = json_decode($response)->data;
 	
@@ -14,7 +14,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>4 Columns Full Width  | Porto - Multipurpose Website Template</title>	
+		<title>Achei Pegaí</title>	
 
 		<meta name="keywords" content="WebSite Template" />
 		<meta name="description" content="Porto - Multipurpose Website Template">
@@ -58,8 +58,8 @@
 
 	</head>
 	<body data-plugin-page-transition>
-		<div class="body">
-			<div class="notice-top-bar bg-primary" data-sticky-start-at="180">
+		<div class="body" style="background:#FEFEFF8F">
+			<!--<div class="notice-top-bar bg-primary" data-sticky-start-at="180">
 				<button class="hamburguer-btn hamburguer-btn-light notice-top-bar-close m-0 active" data-set-active="false">
 					<span class="close">
 						<span></span>
@@ -73,7 +73,7 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div>-->
 			<header id="header" data-plugin-options="{'stickyEnabled': true, 'stickyEnableOnBoxed': true, 'stickyEnableOnMobile': false, 'stickyStartAt': 135, 'stickySetTop': '-135px', 'stickyChangeLogo': true}">
 				<div class="header-body header-body-bottom-border-fixed box-shadow-none border-top-0">
 					<div class="header-container container">
@@ -82,7 +82,7 @@
 								<div class="header-row justify-content-between">
 									<div class="header-logo z-index-2 col-lg-2 px-0">
 										<a href="index.html">
-											<img alt="Porto" width="120" height="84" data-sticky-width="100" data-sticky-height="80" data-sticky-top="84" src="img/logo-default-slim.png">
+											<img alt="Porto" width="100" height="84" data-sticky-width="100" data-sticky-height="80" data-sticky-top="84" src="img/logo-default-slim.png">
 										</a>
 									</div>
 									<div class="header-nav-features header-nav-features-no-border col-lg-5 col-xl-6 px-0 ms-0">
@@ -97,12 +97,13 @@
 														<div class="search-form-select-wrapper">
 															<div class="custom-select-1">
 																<select name="category" class="form-control form-select">
-																	<option value="all" selected>Todas as lojas</option>
-																	<option value="fashion">Fashion</option>
-																	<option value="electronics">Electronics</option>
-																	<option value="homegarden">Home & Garden</option>
-																	<option value="motors">Motors</option>
-																	<option value="features">Features</option>
+																	<option value="" selected>Todas as lojas</option>
+																	<?php
+																		foreach($lojas as $loja){
+																			echo '<option value="'.$loja->nome.'">'.$loja->nome.'</option>';
+
+																		}
+																	?>
 																</select>
 															</div>
 															<button class="btn" type="submit">
@@ -318,7 +319,7 @@
 
 										<div class="product-thumb-info-badges-wrapper">
 
-<span class="badge badge-ecommerce badge-danger">27% OFF</span>
+											<span class="badge badge-ecommerce badge-danger">27% OFF</span>
 										</div>
 
 										<div class="addtocart-btn-wrapper">
@@ -544,7 +545,7 @@
 								</li>
 							</ul>
 						</div>
-						<div class="col-md-6 col-lg-9 mb-5 mb-md-0">
+						<div class="col-md-6 col-lg-3 mb-5 mb-md-0">
 							<h5 class="text-4 text-color-light mb-3">LOJAS PARCEIRAS</h5>
 							<ul class="list list-unstyled list-inline mb-0">
 								<?php
@@ -575,6 +576,15 @@
 								<li class="list-inline-item"><a href="https://tidd.ly/3MFzRWc" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">Kanui</a></li>
 								-->
 							</ul>
+						</div>
+						<div class="col-md-12 col-lg-6 mb-5 mb-md-0">
+							<h5 class="text-4 text-color-light mb-3">Instagram</h5>
+							<div data-mc-src="23819f2a-d593-4470-baec-a92b3732338b#instagram"></div>
+							<div id='block-dark' style="height: 3rem; width: 100%; background: #212529; position: absolute; margin-top: -3rem;"></div>
+							<script 
+							src="https://cdn2.woxo.tech/a.js#612784704930140016ca99e5" 
+							async data-usrc>
+							</script>
 						</div>
 						
 					</div>
