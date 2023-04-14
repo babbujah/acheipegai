@@ -1,11 +1,11 @@
 <?php
 /**
- * LojaListagem Listing
+ * CategoriaList Listing
  * @version    1.0
- * @package    control/loja
+ * @package    control/categoria
  * @author     brunosilva
  */
-class LojaListagem extends TPage
+class CategoriaList extends TPage
 {
     protected $form;     // registration form
     protected $datagrid; // listing
@@ -21,72 +21,48 @@ class LojaListagem extends TPage
         parent::__construct();
         
         $this->setDatabase('acheipegai');            // defines the database
-        $this->setActiveRecord('Loja');   // defines the active record
+        $this->setActiveRecord('Categoria');   // defines the active record
         $this->setDefaultOrder('id', 'asc');         // defines the default order
         $this->setLimit(10);
         // $this->setCriteria($criteria) // define a standard filter
 
         $this->addFilterField('id', '=', 'id'); // filterField, operator, formField
         $this->addFilterField('nome', 'like', 'nome'); // filterField, operator, formField
-        $this->addFilterField('link_afiliado', 'like', 'link_afiliado'); // filterField, operator, formField
-        $this->addFilterField('logo', 'like', 'logo'); // filterField, operator, formField
 
-        $this->form = new TForm('form_search_Loja');
+        $this->form = new TForm('form_search_Categoria');
         
         $id = new TEntry('id');
         $nome = new TEntry('nome');
-        $link_afiliado = new TEntry('link_afiliado');
-        $logo = new TEntry('logo');
 
         $id->exitOnEnter();
         $nome->exitOnEnter();
-        $link_afiliado->exitOnEnter();
-        $logo->exitOnEnter();
 
         $id->setSize('100%');
         $nome->setSize('100%');
-        $link_afiliado->setSize('100%');
-        $logo->setSize('100%');
 
         $id->tabindex = -1;
         $nome->tabindex = -1;
-        $link_afiliado->tabindex = -1;
-        $logo->tabindex = -1;
 
         $id->setExitAction( new TAction([$this, 'onSearch'], ['static'=>'1']) );
         $nome->setExitAction( new TAction([$this, 'onSearch'], ['static'=>'1']) );
-        $link_afiliado->setExitAction( new TAction([$this, 'onSearch'], ['static'=>'1']) );
-        $logo->setExitAction( new TAction([$this, 'onSearch'], ['static'=>'1']) );
         
         // creates a DataGrid
         $this->datagrid = new BootstrapDatagridWrapper(new TDataGrid);
         $this->datagrid->style = 'width: 100%';
         // $this->datagrid->enablePopover('Popover', 'Hi <b> {name} </b>');
         
+
         // creates the datagrid columns
         $column_id = new TDataGridColumn('id', 'Id', 'left');
         $column_nome = new TDataGridColumn('nome', 'Nome', 'left');
-        $column_link_afiliado = new TDataGridColumn('link_afiliado', 'Link Afiliado', 'left');
-        $column_logo = new TDataGridColumn('logo', 'Logo', 'left');
-        $column_logo->setTransformer( function($logo){
-            if(empty($logo)){
-                return "";
-            }
-            
-            $obj = new TImage('../'.$logo);
-            $obj->style = 'max-width: 140px';
-            return $obj;
-            //return TImage::createImage($logo, ['max-width' => '140px']);
-        } );
+
 
         // add the columns to the DataGrid
         $this->datagrid->addColumn($column_id);
         $this->datagrid->addColumn($column_nome);
-        $this->datagrid->addColumn($column_link_afiliado);
-        $this->datagrid->addColumn($column_logo);
 
         
-        $action1 = new TDataGridAction(['LojaForm', 'onEdit'], ['id'=>'{id}']);
+        $action1 = new TDataGridAction(['CategoriaForm', 'onEdit'], ['id'=>'{id}']);
         $action2 = new TDataGridAction([$this, 'onDelete'], ['id'=>'{id}']);
         
         $this->datagrid->addAction($action1, _t('Edit'),   'far:edit blue');
@@ -106,13 +82,9 @@ class LojaListagem extends TPage
         $tr->add( TElement::tag('td', ''));
         $tr->add( TElement::tag('td', $id));
         $tr->add( TElement::tag('td', $nome));
-        $tr->add( TElement::tag('td', $link_afiliado));
-        $tr->add( TElement::tag('td', $logo));
 
         $this->form->addField($id);
         $this->form->addField($nome);
-        $this->form->addField($link_afiliado);
-        $this->form->addField($logo);
 
         // keep form filled
         $this->form->setData( TSession::getValue(__CLASS__.'_filter_data'));
@@ -121,7 +93,7 @@ class LojaListagem extends TPage
         $this->pageNavigation = new TPageNavigation;
         $this->pageNavigation->setAction(new TAction([$this, 'onReload']));
         
-        $panel = new TPanelGroup('Loja');
+        $panel = new TPanelGroup('Categoria');
         $panel->add($this->form);
         $panel->addFooter($this->pageNavigation);
         
@@ -133,7 +105,7 @@ class LojaListagem extends TPage
         $dropdown->addAction( _t('Save as PDF'), new TAction([$this, 'onExportPDF'], ['register_state' => 'false', 'static'=>'1']), 'far:file-pdf red' );
         $panel->addHeaderWidget( $dropdown );
         
-        $panel->addHeaderActionLink( _t('New'),  new TAction(['LojaForm', 'onEdit'], ['register_state' => 'false']), 'fa:plus green' );
+        $panel->addHeaderActionLink( _t('New'),  new TAction(['CategoriaForm', 'onEdit'], ['register_state' => 'false']), 'fa:plus green' );
         
         // vertical box container
         $container = new TVBox;

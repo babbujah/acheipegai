@@ -1,11 +1,11 @@
 <?php
 /**
- * LojaForm Form
+ * CategoriaForm Form
  * @version    1.0
- * @package    control/loja
+ * @package    control/categoria
  * @author     brunosilva
  */
-class LojaForm extends TPage
+class CategoriaForm extends TPage
 {
     protected $form; // form
     
@@ -19,31 +19,24 @@ class LojaForm extends TPage
         
         
         // creates the form
-        $this->form = new BootstrapFormBuilder('form_Loja');
-        $this->form->setFormTitle('Loja');
+        $this->form = new BootstrapFormBuilder('form_Categoria');
+        $this->form->setFormTitle('Categoria');
         
 
         // create the form fields
         $id = new TEntry('id');
         $nome = new TEntry('nome');
-        $link_afiliado = new TEntry('link_afiliado');
-        //$logo = new TEntry('logo');
-        $logo_nova = new TFile('logo_nova');
-        $logo_nova->setAllowedExtensions(['png', 'jpg']);
-        
+
+
         // add the fields
         $this->form->addFields( [ new TLabel('Id') ], [ $id ] );
         $this->form->addFields( [ new TLabel('Nome') ], [ $nome ] );
-        $this->form->addFields( [ new TLabel('Link Afiliado') ], [ $link_afiliado ] );
-        $this->form->addFields( [ new TLabel('Logo') ], [ $logo_nova ] );
 
 
 
         // set sizes
         $id->setSize('100%');
         $nome->setSize('100%');
-        $link_afiliado->setSize('100%');
-        $logo_nova->setSize('100%');
 
 
 
@@ -90,20 +83,9 @@ class LojaForm extends TPage
             $this->form->validate(); // validate form data
             $data = $this->form->getData(); // get form data as array
             
-            //var_dump($data->logo);
-            //die;
-            
-            $object = new Loja;  // create an empty object
+            $object = new Categoria;  // create an empty object
             $object->fromArray( (array) $data); // load the object with data
-            //$object->logo = ./img/lojas/'.$data->nome.'.png';
             $object->store(); // save the object
-            
-            if(!empty($data->logo_nova)){
-                rename('tmp/'.$data->logo_nova, '../img/lojas/'.$object->id.'.png');
-                $object->logo = './img/lojas/'.$object->id.'.png';
-                $object->store();
-                unset($data->logo_nova);            
-            }
             
             // get the generated id
             $data->id = $object->id;
@@ -142,7 +124,7 @@ class LojaForm extends TPage
             {
                 $key = $param['key'];  // get the parameter $key
                 TTransaction::open('acheipegai'); // open a transaction
-                $object = new Loja($key); // instantiates the Active Record
+                $object = new Categoria($key); // instantiates the Active Record
                 $this->form->setData($object); // fill the form
                 TTransaction::close(); // close the transaction
             }
