@@ -1,11 +1,11 @@
 <?php
 /**
- * LojaListagem Listing
+ * LojaList Listing
  * @version    1.0
  * @package    control/loja
  * @author     brunosilva
  */
-class LojaListagem extends TPage
+class LojaList extends TPage
 {
     protected $form;     // registration form
     protected $datagrid; // listing
@@ -64,20 +64,13 @@ class LojaListagem extends TPage
         // $this->datagrid->enablePopover('Popover', 'Hi <b> {name} </b>');
         
         // creates the datagrid columns
-        $column_id = new TDataGridColumn('id', 'Id', 'left');
-        $column_nome = new TDataGridColumn('nome', 'Nome', 'left');
-        $column_link_afiliado = new TDataGridColumn('link_afiliado', 'Link Afiliado', 'left');
-        $column_logo = new TDataGridColumn('logo', 'Logo', 'left');
-        $column_logo->setTransformer( function($logo){
-            if(empty($logo)){
-                return "";
-            }
-            
-            $obj = new TImage('../'.$logo);
-            $obj->style = 'max-width: 140px';
-            return $obj;
-            //return TImage::createImage($logo, ['max-width' => '140px']);
-        } );
+        $column_id = new TDataGridColumn('id', 'Id', 'left', '5%');
+        $column_nome = new TDataGridColumn('nome', 'Nome', 'left', '70%');
+        $column_link_afiliado = new TDataGridColumn('link_afiliado', 'Link Afiliado', 'left', '10%');
+        $column_link_afiliado->setTransformer( ['FormatarDados', 'formatarLink'] );
+        
+        $column_logo = new TDataGridColumn('logo', 'Logo', 'center', '10%');
+        $column_logo->setTransformer( ['FormatarDados', 'formatarImagem'] );
 
         // add the columns to the DataGrid
         $this->datagrid->addColumn($column_id);
@@ -91,6 +84,9 @@ class LojaListagem extends TPage
         
         $this->datagrid->addAction($action1, _t('Edit'),   'far:edit blue');
         $this->datagrid->addAction($action2 ,_t('Delete'), 'far:trash-alt red');
+        
+        // desabilita a função padrão de clique para edição do registro
+        $this->datagrid->disableDefaultClick();
         
         // create the datagrid model
         $this->datagrid->createModel();

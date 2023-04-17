@@ -30,21 +30,25 @@ class LojaForm extends TPage
         //$logo = new TEntry('logo');
         $logo_nova = new TFile('logo_nova');
         $logo_nova->setAllowedExtensions(['png', 'jpg']);
+        $logo_nova->setCompleteAction( new TAction( [$this, 'onChangeLogo'] ) );
+        
+        $logo_view = new TImage('app/images/noimage.png');
+        $logo_view->width = '200';
+        $logo_view->id = 'logo_view';
         
         // add the fields
-        $this->form->addFields( [ new TLabel('Id') ], [ $id ] );
-        $this->form->addFields( [ new TLabel('Nome') ], [ $nome ] );
-        $this->form->addFields( [ new TLabel('Link Afiliado') ], [ $link_afiliado ] );
-        $this->form->addFields( [ new TLabel('Logo') ], [ $logo_nova ] );
-
-
+        $this->form->addFields( [ new TLabel('Id'), $id ] );
+        $this->form->addFields( [ new TLabel('Nome'), $nome ] );
+        $this->form->addFields( [ new TLabel('Link Afiliado'), $link_afiliado ] );
+        $this->form->addFields( [ new TLabel('Logo'), $logo_nova ] );
+        $this->form->addContent( [$logo_view] );
+        
 
         // set sizes
         $id->setSize('100%');
         $nome->setSize('100%');
         $link_afiliado->setSize('100%');
         $logo_nova->setSize('100%');
-
 
 
         if (!empty($id))
@@ -70,6 +74,15 @@ class LojaForm extends TPage
         
         parent::add($container);
     }
+    
+    public static function onChangeLogo( $param ){
+        if( !empty($param['logo_nova']) ){
+            $logo = empty($param['use_path']) ? './tmp/'.$param['logo_nova'] : $param['logo_nova'];
+            TScript::create( "
+                    $('#logo_view').attr('src', '".$logo."');
+            " );
+        }
+    }
 
     /**
      * Save form data
@@ -89,9 +102,7 @@ class LojaForm extends TPage
             
             $this->form->validate(); // validate form data
             $data = $this->form->getData(); // get form data as array
-            
-            //var_dump($data->logo);
-            //die;
+                       
             
             $object = new Loja;  // create an empty object
             $object->fromArray( (array) $data); // load the object with data
@@ -99,8 +110,9 @@ class LojaForm extends TPage
             $object->store(); // save the object
             
             if(!empty($data->logo_nova)){
-                rename('tmp/'.$data->logo_nova, '../img/lojas/'.$object->id.'.png');
-                $object->logo = './img/lojas/'.$object->id.'.png';
+                $logo = md5(rand()).'.png';
+                rename('tmp/'.$data->logo_nova, '../img/lojas/'.$logo);
+                $object->logo = './img/lojas/'.$logo;
                 $object->store();
                 unset($data->logo_nova);            
             }
@@ -110,6 +122,10 @@ class LojaForm extends TPage
             
             $this->form->setData($data); // fill form data
             TTransaction::close(); // close the transaction
+            
+            if( !empty($object->logo) ){
+                self::onChangeLogo( ['logo_nova' => URL_BASE.$object->logo, 'use_path' => true ]  );
+            }
             
             new TMessage('info', AdiantiCoreTranslator::translate('Record saved'));
         }
@@ -145,6 +161,9 @@ class LojaForm extends TPage
                 $object = new Loja($key); // instantiates the Active Record
                 $this->form->setData($object); // fill the form
                 TTransaction::close(); // close the transaction
+                if( !empty($object->logo) ){
+                    self::onChangeLogo( ['logo_nova' => URL_BASE.$object->logo, 'use_path' => true ]  );
+                }
             }
             else
             {

@@ -26,41 +26,55 @@ class ProdutoForm extends TPage
         // create the form fields
         $id = new TEntry('id');
         $nome = new TEntry('nome');
-        $descricao = new TEntry('descricao');
+        $descricao = new TText('descricao');
+        
         $preco = new TEntry('preco');
-        $foto = new TEntry('foto');
+        $preco->setNumericMask(2, ',', '.', true);
+        $preco->style = 'text-align: left';
+        
+        $foto_nova = new TFile('foto_nova');
+        $foto_nova->setAllowedExtensions(['png', 'jpg']);
+        $foto_nova->setCompleteAction( new TAction( [$this, 'onChangeFoto'] ) );
+        
         $link_afiliado = new TEntry('link_afiliado');
-        $data_criado = new TEntry('data_criado');
-        $id_categoria = new TDBUniqueSearch('id_categoria', 'acheipegai', 'Categoria', 'id', 'nome');
-        $id_loja = new TDBUniqueSearch('id_loja', 'acheipegai', 'Loja', 'id', 'nome');
-
-
+        //$link_afiliado->setValueCallback( function(){
+        //    return TElement::tag( 'a', 'Clique para acessar', ['href' => $link_afiliado ] );
+        //}
+        
+        //$categoria = new TDBUniqueSearch('id_categoria', 'acheipegai', 'Categoria', 'id', 'nome');
+        $categoria = new TDBCombo( 'id_categoria', 'acheipegai', 'Categoria', 'id', 'nome' );
+        $categoria->enableSearch();
+        
+        $loja = new TDBCombo('id_loja', 'acheipegai', 'Loja', 'id', 'nome');
+        $loja->enableSearch();
+        
+        $foto_view = new TImage('app/images/noimage.png');
+        $foto_view->id = 'foto_view';
+        $foto_view->width = '200';
+        
         // add the fields
-        $this->form->addFields( [ new TLabel('Id') ], [ $id ] );
-        $this->form->addFields( [ new TLabel('Nome') ], [ $nome ] );
-        $this->form->addFields( [ new TLabel('Descricao') ], [ $descricao ] );
-        $this->form->addFields( [ new TLabel('Preco') ], [ $preco ] );
-        $this->form->addFields( [ new TLabel('Foto') ], [ $foto ] );
-        $this->form->addFields( [ new TLabel('Link Afiliado') ], [ $link_afiliado ] );
-        $this->form->addFields( [ new TLabel('Data Criado') ], [ $data_criado ] );
-        $this->form->addFields( [ new TLabel('Id Categoria') ], [ $id_categoria ] );
-        $this->form->addFields( [ new TLabel('Id Loja') ], [ $id_loja ] );
-
-
+        $this->form->addFields( [ new TLabel('Id'), $id ] );
+        $this->form->addFields( [ new TLabel('Nome'), $nome ] );
+        $this->form->addFields( [ new TLabel('Descricao'), $descricao ] );
+        $this->form->addFields( [ new TLabel('Link Afiliado'), $link_afiliado ] );
+        $this->form->addFields( [ new TLabel('Preco'), $preco ], [ new TLabel('Categoria'), $categoria ], [ new TLabel('Loja'), $loja ] );
+        $this->form->addFields( [ new TLabel('Foto'), $foto_nova ] );
+        $this->form->addContent( [$foto_view] );
+        //$this->form->addFields( [$foto_view] );        
+        
 
         // set sizes
         $id->setSize('100%');
         $nome->setSize('100%');
         $descricao->setSize('100%');
         $preco->setSize('100%');
-        $foto->setSize('100%');
+        $foto_nova->setSize('100%');
         $link_afiliado->setSize('100%');
-        $data_criado->setSize('100%');
-        $id_categoria->setSize('100%');
-        $id_loja->setSize('100%');
-
-
-
+        $categoria->setSize('100%');
+        $loja->setSize('100%');
+        //$foto_view
+        
+        
         if (!empty($id))
         {
             $id->setEditable(FALSE);
@@ -83,6 +97,15 @@ class ProdutoForm extends TPage
         $container->add($this->form);
         
         parent::add($container);
+    }
+    
+    public static function onChangeFoto($param){
+        if( !empty($param['foto_nova']) ){
+            $foto = empty($param['use_path']) ? './tmp/'.$param['foto_nova'] : $param['foto_nova'];
+            TScript::create( "
+                    $('#foto_view').attr('src', '".$foto."');
+            " );
+        }
     }
 
     /**
@@ -108,11 +131,23 @@ class ProdutoForm extends TPage
             $object->fromArray( (array) $data); // load the object with data
             $object->store(); // save the object
             
+            if( !empty($data->foto_nova) ){
+                $nome_foto = md5(rand()).'.png';
+                rename('tmp/'.$data->foto_nova, '../img/produtos/'.$nome_foto);
+                $object->foto = './img/produtos/'.$nome_foto;
+                $object->store();
+                unset($data->foto_nova);
+            }
+            
             // get the generated id
             $data->id = $object->id;
             
             $this->form->setData($data); // fill form data
             TTransaction::close(); // close the transaction
+            
+            if( !empty($object->foto) ){
+                self::onChangeFoto( ['foto_nova' => URL_BASE.$object->foto, 'use_path' => true ]  );
+            }
             
             new TMessage('info', AdiantiCoreTranslator::translate('Record saved'));
         }
@@ -148,6 +183,10 @@ class ProdutoForm extends TPage
                 $object = new Produto($key); // instantiates the Active Record
                 $this->form->setData($object); // fill the form
                 TTransaction::close(); // close the transaction
+                
+                if( !empty($object->foto) ){
+                    self::onChangeFoto( ['foto_nova' => URL_BASE.$object->foto, 'use_path' => true ]  );
+                }
             }
             else
             {

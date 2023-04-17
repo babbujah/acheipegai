@@ -12,11 +12,11 @@ class Produto extends TRecord{
     
     const CREATEDAT = 'data_criado';
     
-    private $nome;
+    /*private $nome;
     private $descricao;
     private $preco;
     private $foto;
-    private $link_afiliado;
+    private $link_afiliado;*/
     private $categoria;
     private $loja;
     
@@ -30,6 +30,7 @@ class Produto extends TRecord{
         parent::addAttribute('descricao');
         parent::addAttribute('preco');
         parent::addAttribute('foto');
+        parent::addAttribute('link_afiliado');
         parent::addAttribute('id_categoria');
         parent::addAttribute('id_loja');
         parent::addAttribute('data_criado');

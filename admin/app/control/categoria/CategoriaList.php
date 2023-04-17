@@ -53,7 +53,7 @@ class CategoriaList extends TPage
         
 
         // creates the datagrid columns
-        $column_id = new TDataGridColumn('id', 'Id', 'left');
+        $column_id = new TDataGridColumn('id', 'Id', 'left', '5%');
         $column_nome = new TDataGridColumn('nome', 'Nome', 'left');
 
 

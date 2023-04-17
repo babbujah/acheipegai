@@ -121,33 +121,16 @@
     </menu>
   </menuitem>
   <menuitem label="Lojas">
+    <action>LojaList</action>
     <icon>fas:building fa-fw</icon>
-    <menu>
-      <menuitem label="Listagem de lojas">
-        <action>LojaListagem</action>
-        <icon>fas:building fa-fw</icon>
-      </menuitem>
-      <menuitem label="Cadastro de lojas">
-        <action>LojaForm</action>
-        <icon>far:building fa-fw</icon>
-      </menuitem>
-      <menuitem label="Listagem de categorias">
-        <action>CategoriaList</action>
-        <icon>fas:atlas fa-fw</icon>
-      </menuitem>
-      <menuitem label="Cadastro de categorias">
-        <action>CategoriaForm</action>
-        <icon>fas:atlas fa-fw</icon>
-      </menuitem>
-      <menuitem label="Listagem de produtos">
-        <action>ProdutoList</action>
-        <icon>fas:shopping-bag fa-fw</icon>
-      </menuitem>
-      <menuitem label="Cadastro de produtos">
-        <action>ProdutoForm</action>
-        <icon>fas:shopping-bag fa-fw</icon>
-      </menuitem>
-    </menu>
+  </menuitem>
+  <menuitem label="Categorias">
+    <action>CategoriaList</action>
+    <icon>fas:clipboard-list fa-fw</icon>
+  </menuitem>
+  <menuitem label="Produtos">
+    <action>ProdutoList</action>
+    <icon>fas:shopping-bag fa-fw</icon>
   </menuitem>
   <menuitem label="Logout">
     <action>LoginForm#method=onLogout#static=1</action>

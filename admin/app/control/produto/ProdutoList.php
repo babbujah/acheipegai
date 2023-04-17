@@ -32,7 +32,7 @@ class ProdutoList extends TPage
         $this->addFilterField('preco', 'like', 'preco'); // filterField, operator, formField
         $this->addFilterField('foto', 'like', 'foto'); // filterField, operator, formField
         $this->addFilterField('link_afiliado', 'like', 'link_afiliado'); // filterField, operator, formField
-        $this->addFilterField('data_criado', 'like', 'data_criado'); // filterField, operator, formField
+        //$this->addFilterField('data_criado', 'like', 'data_criado'); // filterField, operator, formField
         $this->addFilterField('id_categoria', '=', 'id_categoria'); // filterField, operator, formField
         $this->addFilterField('id_loja', '=', 'id_loja'); // filterField, operator, formField
 
@@ -44,7 +44,7 @@ class ProdutoList extends TPage
         $preco = new TEntry('preco');
         $foto = new TEntry('foto');
         $link_afiliado = new TEntry('link_afiliado');
-        $data_criado = new TEntry('data_criado');
+        //$data_criado = new TEntry('data_criado');
         $id_categoria = new TDBUniqueSearch('id_categoria', 'acheipegai', 'Categoria', 'id', 'nome');
         $id_loja = new TDBUniqueSearch('id_loja', 'acheipegai', 'Loja', 'id', 'nome');
 
@@ -54,7 +54,7 @@ class ProdutoList extends TPage
         $preco->exitOnEnter();
         $foto->exitOnEnter();
         $link_afiliado->exitOnEnter();
-        $data_criado->exitOnEnter();
+        //$data_criado->exitOnEnter();
 
         $id->setSize('100%');
         $nome->setSize('100%');
@@ -62,7 +62,7 @@ class ProdutoList extends TPage
         $preco->setSize('100%');
         $foto->setSize('100%');
         $link_afiliado->setSize('100%');
-        $data_criado->setSize('100%');
+        //$data_criado->setSize('100%');
         $id_categoria->setSize('100%');
         $id_loja->setSize('100%');
 
@@ -72,7 +72,7 @@ class ProdutoList extends TPage
         $preco->tabindex = -1;
         $foto->tabindex = -1;
         $link_afiliado->tabindex = -1;
-        $data_criado->tabindex = -1;
+        //$data_criado->tabindex = -1;
         $id_categoria->tabindex = -1;
         $id_loja->tabindex = -1;
 
@@ -82,7 +82,7 @@ class ProdutoList extends TPage
         $preco->setExitAction( new TAction([$this, 'onSearch'], ['static'=>'1']) );
         $foto->setExitAction( new TAction([$this, 'onSearch'], ['static'=>'1']) );
         $link_afiliado->setExitAction( new TAction([$this, 'onSearch'], ['static'=>'1']) );
-        $data_criado->setExitAction( new TAction([$this, 'onSearch'], ['static'=>'1']) );
+        //$data_criado->setExitAction( new TAction([$this, 'onSearch'], ['static'=>'1']) );
         $id_categoria->setChangeAction( new TAction([$this, 'onSearch'], ['static'=>'1']) );
         $id_loja->setChangeAction( new TAction([$this, 'onSearch'], ['static'=>'1']) );
         
@@ -93,14 +93,19 @@ class ProdutoList extends TPage
         
 
         // creates the datagrid columns
-        $column_id = new TDataGridColumn('id', 'Id', 'left');
+        $column_id = new TDataGridColumn('id', 'Id', 'left', '5%');
         $column_nome = new TDataGridColumn('nome', 'Nome', 'left');
         $column_descricao = new TDataGridColumn('descricao', 'Descricao', 'left');
-        $column_preco = new TDataGridColumn('preco', 'Preco', 'left');
-        $column_foto = new TDataGridColumn('foto', 'Foto', 'left');
-        $column_link_afiliado = new TDataGridColumn('link_afiliado', 'Link Afiliado', 'left');
-        $column_data_criado = new TDataGridColumn('data_criado', 'Data Criado', 'left');
-        $column_id_categoria = new TDataGridColumn('categoria->nome', 'Categoria', 'left');
+        $column_preco = new TDataGridColumn('preco', 'Preco', 'right', '8%');
+        $column_preco->setTransformer(['FormatarDados', 'formatarMoeda']);
+        
+        $column_foto = new TDataGridColumn('foto', 'Foto', 'center', '10%');
+        $column_foto->setTransformer(['FormatarDados', 'formatarImagem']);
+        
+        $column_link_afiliado = new TDataGridColumn('link_afiliado', 'Link Afiliado', 'left', '10%');
+        $column_link_afiliado->setTransformer( ['FormatarDados', 'formatarLink'] );
+        //$column_data_criado = new TDataGridColumn('data_criado', 'Data Criado', 'left');
+        $column_id_categoria = new TDataGridColumn('categoria->nome', 'Categoria', 'left', '10%');
         $column_id_loja = new TDataGridColumn('loja->nome', 'Loja', 'left');
 
 
@@ -111,16 +116,18 @@ class ProdutoList extends TPage
         $this->datagrid->addColumn($column_preco);
         $this->datagrid->addColumn($column_foto);
         $this->datagrid->addColumn($column_link_afiliado);
-        $this->datagrid->addColumn($column_data_criado);
+        //$this->datagrid->addColumn($column_data_criado);
         $this->datagrid->addColumn($column_id_categoria);
         $this->datagrid->addColumn($column_id_loja);
-
         
         $action1 = new TDataGridAction(['ProdutoForm', 'onEdit'], ['id'=>'{id}']);
         $action2 = new TDataGridAction([$this, 'onDelete'], ['id'=>'{id}']);
         
         $this->datagrid->addAction($action1, _t('Edit'),   'far:edit blue');
         $this->datagrid->addAction($action2 ,_t('Delete'), 'far:trash-alt red');
+        
+        // desabilita a função padrão de clique para edição do registro
+        $this->datagrid->disableDefaultClick();
         
         // create the datagrid model
         $this->datagrid->createModel();
@@ -140,7 +147,7 @@ class ProdutoList extends TPage
         $tr->add( TElement::tag('td', $preco));
         $tr->add( TElement::tag('td', $foto));
         $tr->add( TElement::tag('td', $link_afiliado));
-        $tr->add( TElement::tag('td', $data_criado));
+        //$tr->add( TElement::tag('td', $data_criado));
         $tr->add( TElement::tag('td', $id_categoria));
         $tr->add( TElement::tag('td', $id_loja));
 
@@ -150,7 +157,7 @@ class ProdutoList extends TPage
         $this->form->addField($preco);
         $this->form->addField($foto);
         $this->form->addField($link_afiliado);
-        $this->form->addField($data_criado);
+        //$this->form->addField($data_criado);
         $this->form->addField($id_categoria);
         $this->form->addField($id_loja);
 

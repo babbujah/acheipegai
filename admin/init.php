@@ -6,6 +6,7 @@ if (version_compare(PHP_VERSION, '7.1.0') == -1)
 
 // define the autoloader
 require_once 'lib/adianti/core/AdiantiCoreLoader.php';
+require_once '../env.php';
 spl_autoload_register(array('Adianti\Core\AdiantiCoreLoader', 'autoload'));
 Adianti\Core\AdiantiCoreLoader::loadClassMap();
 
