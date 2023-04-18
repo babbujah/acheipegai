@@ -35,6 +35,7 @@ class LojaForm extends TPage
         $logo_view = new TImage('app/images/noimage.png');
         $logo_view->width = '200';
         $logo_view->id = 'logo_view';
+        $logo_view->onerror = "this.onerror=null;this.src='app/images/noimage.png';";
         
         // add the fields
         $this->form->addFields( [ new TLabel('Id'), $id ] );

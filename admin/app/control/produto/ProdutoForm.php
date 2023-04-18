@@ -51,6 +51,7 @@ class ProdutoForm extends TPage
         $foto_view = new TImage('app/images/noimage.png');
         $foto_view->id = 'foto_view';
         $foto_view->width = '200';
+        $foto_view->onerror = "this.onerror=null;this.src='app/images/noimage.png';";
         
         // add the fields
         $this->form->addFields( [ new TLabel('Id'), $id ] );
