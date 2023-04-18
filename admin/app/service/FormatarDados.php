@@ -37,6 +37,7 @@ class FormatarDados{
         
         $imagemFormatada = new TImage( URL_BASE.$imagem );
         $imagemFormatada->style = 'max-width: 140px';
+        $imagemFormatada->onerror = "this.onerror=null;this.src='app/images/noimage.png';";
         
         return $imagemFormatada;
     }

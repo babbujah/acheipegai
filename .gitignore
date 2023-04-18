@@ -12,7 +12,7 @@
 /.buildpath
 
 # arquivos
-/tmp/
+#/tmp/
 /admin/tmp
 !/tmp/.htaccess
 /app/output/
