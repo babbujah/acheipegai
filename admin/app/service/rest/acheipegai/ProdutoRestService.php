@@ -4,8 +4,8 @@
 **/
 class ProdutoRestService extends AdiantiRecordService{
     const DATABASE = 'acheipegai';
-    const ACTIVE_RECORD = 'Produto';
-    const ATTRIBUTES = ['nome', 'descricao', 'preco', 'foto', 'link_afiliado', 'id_categoria', 'id_loja'];
+    const ACTIVE_RECORD = 'ProdutoView';
+    const ATTRIBUTES = ['nome', 'descricao', 'preco', 'foto', 'link_afiliado', 'id_categoria', 'id_loja', 'nome_categoria', 'nome_loja', 'logo_loja', 'link_afiliado_loja'];
     
     /**
      * Delete an Active Record object from the database
