@@ -162,7 +162,7 @@
 															</ul>
 														</li>
 														<li class="dropdown">
-															<a class="dropdown-item dropdown-toggle" href="#">
+															<a class="dropdown-item dropdown-toggle" href="lojas">
 																Lojas
 															</a>
 															<ul class="dropdown-menu">

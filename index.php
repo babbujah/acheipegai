@@ -7,6 +7,11 @@
 	$response = file_get_contents(URL_BASE.'admin/rest.php?class=CategoriaRestService&method=handle&order=nome');
 	$categorias = json_decode($response)->data;
 
+	$response = file_get_contents(URL_BASE.'admin/rest.php?class=ProdutoRestService&method=handle&order=nome');
+	//$produtos = json_decode($response)->data;
+
+	var_dump($response); die;
+
 	$page = empty($_GET['page']) ? 'home' : $_GET['page'];
 
 	if( !is_file('pages/'.$page.'.php')  ){
