@@ -57,4 +57,17 @@ class FormatarDados{
         
         return TElement::tag( 'a', 'Clique para acessar', ['href' => $url ] );
     }
+    
+    public static function hash( $n, $prefixo = '', $sufixo = '' ){
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $randomString = '';
+  
+        for ($i = 0; $i < $n; $i++) {
+            $index = rand(0, strlen($characters) - 1);
+            $randomString .= $characters[$index];
+        }
+  
+        return $prefixo.$randomString.$sufixo;
+    
+    }
 }
