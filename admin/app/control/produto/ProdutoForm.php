@@ -51,7 +51,6 @@ class ProdutoForm extends TPage
         $foto_view = new TImage('app/images/noimage.png');
         $foto_view->id = 'foto_view';
         $foto_view->width = '200';
-        $foto_view->onerror = "this.onerror=null;this.src='app/images/noimage.png';";
         
         // add the fields
         $this->form->addFields( [ new TLabel('Id'), $id ] );
@@ -85,7 +84,12 @@ class ProdutoForm extends TPage
          $fieldX->addValidation( 'Field X', new TRequiredValidator ); // add validation
          $fieldX->setSize( '100%' ); // set size
          **/
-         
+         // validations
+         //$nome->addValidation( 'Nome', new TRequiredValidator );
+         $nome->addValidation( 'Nome', new TMinLengthValidator, [2] );
+         $link_afiliado->addValidation( 'Link Afiliado', TMinLengthValidator, [3] );
+         $preco->addValidation( 'Preço', TNumericValidator );
+                  
         // create the form actions
         $btn = $this->form->addAction(_t('Save'), new TAction([$this, 'onSave']), 'fa:save');
         $btn->class = 'btn btn-sm btn-primary';
@@ -101,6 +105,7 @@ class ProdutoForm extends TPage
     }
     
     public static function onChangeFoto($param){
+        
         if( !empty($param['foto_nova']) ){
             $foto = empty($param['use_path']) ? './tmp/'.$param['foto_nova'] : $param['foto_nova'];
             TScript::create( "
@@ -127,6 +132,7 @@ class ProdutoForm extends TPage
             
             $this->form->validate(); // validate form data
             $data = $this->form->getData(); // get form data as array
+            
             
             $object = new Produto;  // create an empty object
             $object->fromArray( (array) $data); // load the object with data

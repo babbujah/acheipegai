@@ -4,8 +4,88 @@
 **/
 class ProdutoRestService extends AdiantiRecordService{
     const DATABASE = 'acheipegai';
-    const ACTIVE_RECORD = 'ProdutoView';
-    const ATTRIBUTES = ['nome', 'descricao', 'preco', 'foto', 'link_afiliado', 'id_categoria', 'id_loja', 'nome_categoria', 'nome_loja', 'logo_loja', 'link_afiliado_loja'];
+    const ACTIVE_RECORD = 'Produto';
+    const ATTRIBUTES = ['nome', 'descricao', 'preco', 'foto', 'link_afiliado', 'id_categoria', 'id_loja'];
+    
+    /**
+     * Find a Active Record and returns it
+     * @return The Active Record itself as array
+     * @param $param HTTP parameter
+     */
+    public function load($param)
+    {
+        $database     = static::DATABASE;
+        $activeRecord = static::ACTIVE_RECORD;
+        
+        TTransaction::open($database);
+        
+        $object = new $activeRecord($param['id'], FALSE);
+        
+        TTransaction::close();
+        $attributes = defined('static::ATTRIBUTES') ? static::ATTRIBUTES : null;
+        $object_array = $object->toArray( $attributes );
+        $object_array['nome_loja'] = $object->loja->nome;
+        $object_array['nome_categoria'] = $object->categoria->nome;
+        
+        return $object_array;
+    }
+    
+    /**
+     * List the Active Records by the filter
+     * @return The Active Record list as array
+     * @param $param HTTP parameter
+     */
+    public function loadAll($param)
+    {
+        $database     = static::DATABASE;
+        $activeRecord = static::ACTIVE_RECORD;
+        
+        TTransaction::open($database);
+        
+        $criteria = new TCriteria;
+        if (isset($param['offset']))
+        {
+            $criteria->setProperty('offset', $param['offset']);
+        }
+        if (isset($param['limit']))
+        {
+            $criteria->setProperty('limit', $param['limit']);
+        }
+        if (isset($param['order']))
+        {
+            $criteria->setProperty('order', $param['order']);
+        }
+        if (isset($param['direction']))
+        {
+            $criteria->setProperty('direction', $param['direction']);
+        }
+        if (isset($param['filters']))
+        {
+            foreach ($param['filters'] as $filter)
+            {
+                $criteria->add(new TFilter($filter[0], $filter[1], $filter[2]));
+            }
+        }
+        
+        $repository = new TRepository($activeRecord);
+        $objects = $repository->load($criteria, FALSE);
+        $attributes = defined('static::ATTRIBUTES') ? static::ATTRIBUTES : null;
+        
+        $return = [];
+        if ($objects)
+        {
+            foreach ($objects as $object)
+            {
+                $object_array = $object->toArray( $attributes );
+                $object_array['nome_loja'] = $object->loja->nome;
+                $object_array['nome_categoria'] = $object->categoria->nome;
+                $return[] = $object_array;
+                
+            }
+        }
+        TTransaction::close();
+        return $return;
+    }
     
     /**
      * Delete an Active Record object from the database
