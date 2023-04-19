@@ -34,6 +34,14 @@ class Produto extends TRecord{
         parent::addAttribute('id_categoria');
         parent::addAttribute('id_loja');
         parent::addAttribute('data_criado');
+        parent::addAttribute('hash');
+    }
+    
+    public function store(){
+        parent::store();
+        if( empty($this->hash) ){
+            $this->hash = FormatarDados::hash(6, '', $this->id);
+        }
     }
     
     public function get_categoria(){
