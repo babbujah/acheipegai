@@ -21,12 +21,14 @@ class ProdutoRestService extends AdiantiRecordService{
         
         $object = new $activeRecord($param['id'], FALSE);
         
-        TTransaction::close();
+        
         $attributes = defined('static::ATTRIBUTES') ? static::ATTRIBUTES : null;
         $object_array = $object->toArray( $attributes );
         $object_array['nome_loja'] = $object->loja->nome;
         $object_array['nome_categoria'] = $object->categoria->nome;
         
+		TTransaction::close();
+		
         return $object_array;
     }
     

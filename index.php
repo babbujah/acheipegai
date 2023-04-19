@@ -1,13 +1,20 @@
 <?php
+	$page = empty($_REQUEST['page']) ? 'home' : $_REQUEST['page'];
+
 	require 'env.php';
 	require 'api.php';	
+	require 'content/Page.php';
 
-	$page = empty($_GET['page']) ? 'home' : $_GET['page'];
+	if( is_file('pages/'.$page.'.php')  ){		
+		require 'pages/'.$page.'.php';
 
-	if( !is_file('pages/'.$page.'.php')  ){
-		$page = '404';
+		$object = new $page($_REQUEST);
+		$object->show();
+	}
+	else{
+		$object = new Page($_REQUEST);
+		$object->set404();
+		$object->show();		
 	}
 
-	require 'content/header.php';
-	require 'pages/'.$page.'.php';
-	require 'content/footer.php';
+	
