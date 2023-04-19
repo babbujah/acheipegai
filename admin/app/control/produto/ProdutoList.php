@@ -114,11 +114,12 @@ class ProdutoList extends TPage
         $this->datagrid->addColumn($column_nome);
         $this->datagrid->addColumn($column_descricao);
         $this->datagrid->addColumn($column_preco);
-        $this->datagrid->addColumn($column_foto);
+        
         $this->datagrid->addColumn($column_link_afiliado);
         //$this->datagrid->addColumn($column_data_criado);
         $this->datagrid->addColumn($column_id_categoria);
         $this->datagrid->addColumn($column_id_loja);
+        $this->datagrid->addColumn($column_foto);
         
         $action1 = new TDataGridAction(['ProdutoForm', 'onEdit'], ['id'=>'{id}']);
         $action2 = new TDataGridAction([$this, 'onDelete'], ['id'=>'{id}']);
@@ -145,11 +146,12 @@ class ProdutoList extends TPage
         $tr->add( TElement::tag('td', $nome));
         $tr->add( TElement::tag('td', $descricao));
         $tr->add( TElement::tag('td', $preco));
-        $tr->add( TElement::tag('td', $foto));
+        
         $tr->add( TElement::tag('td', $link_afiliado));
         //$tr->add( TElement::tag('td', $data_criado));
         $tr->add( TElement::tag('td', $id_categoria));
         $tr->add( TElement::tag('td', $id_loja));
+        $tr->add( TElement::tag('td', ''));
 
         $this->form->addField($id);
         $this->form->addField($nome);

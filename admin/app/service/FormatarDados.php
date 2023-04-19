@@ -29,10 +29,9 @@ class FormatarDados{
      * @author brunosilva 
     **/
     public static function formatarImagem( $imagem, $object, $row ){
-        var_dump(file_exists('./'.$imagem));
-        var_dump('./'.$imagem);
+        
         $capturaImagem = $imagem;
-        if( empty($capturaImagem) or file_exists('./'.$capturaImagem) ){
+        if( empty($capturaImagem) ){
             //return "";
             //return URL_BASE.'img/produtos/noimage.png';
             $capturaImagem = 'img/produtos/noimage.png';
@@ -42,6 +41,7 @@ class FormatarDados{
         //$imagemFormatada = new TImage( URL_BASE.$imagem );
         $imagemFormatada = new TImage( URL_BASE.$capturaImagem );
         $imagemFormatada->style = 'max-width: 140px';
+        $imagemFormatada->onerror = "this.onerror=null;this.src='app/images/noimage.png';";
         
         return $imagemFormatada;
     }
@@ -56,5 +56,18 @@ class FormatarDados{
     public static function formatarLink( $url, $object, $row ){
         
         return TElement::tag( 'a', 'Clique para acessar', ['href' => $url ] );
+    }
+    
+    public static function hash( $n, $prefixo = '', $sufixo = '' ){
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $randomString = '';
+  
+        for ($i = 0; $i < $n; $i++) {
+            $index = rand(0, strlen($characters) - 1);
+            $randomString .= $characters[$index];
+        }
+  
+        return $prefixo.$randomString.$sufixo;
+    
     }
 }

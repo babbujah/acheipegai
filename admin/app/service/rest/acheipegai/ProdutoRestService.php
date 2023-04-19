@@ -5,7 +5,34 @@
 class ProdutoRestService extends AdiantiRecordService{
     const DATABASE = 'acheipegai';
     const ACTIVE_RECORD = 'Produto';
-    const ATTRIBUTES = ['nome', 'descricao', 'preco', 'foto', 'link_afiliado', 'id_categoria', 'id_loja'];
+    const ATTRIBUTES = ['nome', 'descricao', 'preco', 'foto', 'data_criado', 'link_afiliado', 'id_categoria', 'id_loja', 'hash'];
+    
+    public function findProdutoByHash( $param ){
+        $database     = static::DATABASE;
+        $activeRecord = static::ACTIVE_RECORD;
+        
+        if( empty($param['hash']) ){
+            throw new Exception( 'hash não encontrado' );
+        }
+        
+        TTransaction::open($database);
+        
+        $object = $activeRecord::where('hash', '=', $param['hash'])->first();        
+        
+        if( !$object instanceof Produto ){
+           throw new Exception( 'hash não encontrado' ); 
+        }
+        
+        $attributes = defined('static::ATTRIBUTES') ? static::ATTRIBUTES : null;
+        $object_array = $object->toArray( $attributes );
+        $object_array['nome_loja'] = $object->loja->nome;
+        $object_array['nome_categoria'] = $object->categoria->nome;
+        
+        TTransaction::close();
+        
+        return $object_array;
+        
+    }
     
     /**
      * Find a Active Record and returns it
