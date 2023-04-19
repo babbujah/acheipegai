@@ -29,15 +29,19 @@ class FormatarDados{
      * @author brunosilva 
     **/
     public static function formatarImagem( $imagem, $object, $row ){
-        
-        if( empty($imagem) ){
-            return "";
+        var_dump(file_exists('./'.$imagem));
+        var_dump('./'.$imagem);
+        $capturaImagem = $imagem;
+        if( empty($capturaImagem) or file_exists('./'.$capturaImagem) ){
+            //return "";
+            //return URL_BASE.'img/produtos/noimage.png';
+            $capturaImagem = 'img/produtos/noimage.png';
             
         }
         
-        $imagemFormatada = new TImage( URL_BASE.$imagem );
+        //$imagemFormatada = new TImage( URL_BASE.$imagem );
+        $imagemFormatada = new TImage( URL_BASE.$capturaImagem );
         $imagemFormatada->style = 'max-width: 140px';
-        $imagemFormatada->onerror = "this.onerror=null;this.src='app/images/noimage.png';";
         
         return $imagemFormatada;
     }

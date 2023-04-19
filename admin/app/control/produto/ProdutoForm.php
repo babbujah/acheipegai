@@ -87,9 +87,11 @@ class ProdutoForm extends TPage
          // validations
          //$nome->addValidation( 'Nome', new TRequiredValidator );
          $nome->addValidation( 'Nome', new TMinLengthValidator, [2] );
-         $link_afiliado->addValidation( 'Link Afiliado', TMinLengthValidator, [3] );
-         $preco->addValidation( 'Preço', TNumericValidator );
-                  
+         $link_afiliado->addValidation( 'Link Afiliado', new TMinLengthValidator, [3] );
+         $preco->addValidation( 'Preço', new TRequiredValidator );
+         $categoria->addValidation( 'Categoria', new TRequiredValidator );
+         $loja->addValidation( 'Loja', new TRequiredValidator );
+         
         // create the form actions
         $btn = $this->form->addAction(_t('Save'), new TAction([$this, 'onSave']), 'fa:save');
         $btn->class = 'btn btn-sm btn-primary';
