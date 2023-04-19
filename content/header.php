@@ -144,6 +144,12 @@
 												<nav class="collapse w-100">
 													<ul class="nav nav-pills w-100" id="mainNav">
 														<li class="dropdown">
+															<a class="dropdown-item dropdown-toggle" href="./">
+																Todos os produtos
+															</a>
+														</li>
+
+														<li class="dropdown">
 															<a class="dropdown-item dropdown-toggle" href="#">
 																Categorias
 															</a>
@@ -165,19 +171,6 @@
 															<a class="dropdown-item dropdown-toggle" href="lojas">
 																Lojas
 															</a>
-															<ul class="dropdown-menu">
-																<?php 
-																	foreach( $lojas as $loja ){
-																		echo '
-																			<li>
-																				<a class="dropdown-item" href="./?loja='.$loja->nome.'">
-																					'.$loja->nome.'
-																				</a>
-																			</li>
-																		';
-																	}
-																?>											
-															</ul>
 														</li>
 													</ul>
 												</nav>

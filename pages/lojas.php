@@ -32,23 +32,29 @@
         <div class="sort-destination-loader sort-destination-loader-showing mt-4 pt-2">
             <div class="row portfolio-list sort-destination lightbox" data-sort-id="portfolio" data-plugin-options="{'delegate': 'a.lightbox-portfolio', 'type': 'image', 'gallery': {'enabled': true}}">
 
-                <div class="col-md-6 col-lg-3 isotope-item brands">
-                    <div class="portfolio-item">
-                        <span class="thumb-info thumb-info-lighten thumb-info-no-borders thumb-info-bottom-info thumb-info-centered-icons border-radius-0">
-                            <span class="thumb-info-wrapper border-radius-0">
-                                <img src="img/projects/project.jpg" class="img-fluid border-radius-0" alt="">
-                                <span class="thumb-info-title">
-                                    <span class="thumb-info-inner line-height-1 font-weight-bold text-dark position-relative top-3">Amazon</span>
-                                </span>
-                                <span class="thumb-info-action">
-                                    <a href="portfolio-single-wide-slider.html">
-                                        <span class="thumb-info-action-icon thumb-info-action-icon-primary"><i class="fas fa-link"></i></span>
-                                    </a>
-                                </span>
-                            </span>
-                        </span>
-                    </div>
-                </div>
+                <?php 
+                    foreach ($lojas as $loja) {
+                        echo '
+                            <div class="col-md-6 col-lg-3 isotope-item brands">
+                                <div class="portfolio-item">
+                                    <span class="thumb-info thumb-info-lighten thumb-info-no-borders thumb-info-bottom-info thumb-info-centered-icons border-radius-0">
+                                        <span class="thumb-info-wrapper border-radius-0">
+                                            <img src="'.$loja->logo.'" class="img-fluid border-radius-0" alt="" style="width: 256px; height: 256px">
+                                            <span class="thumb-info-title">
+                                                <span class="thumb-info-inner line-height-1 font-weight-bold text-dark position-relative top-3">'.$loja->nome.'</span>
+                                            </span>
+                                            <span class="thumb-info-action">
+                                                <a href="'.$loja->link_afiliado.'">
+                                                    <span class="thumb-info-action-icon thumb-info-action-icon-primary"><i class="fas fa-link"></i></span>
+                                                </a>
+                                            </span>
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                        ';
+                    }                            
+                ?>
 
             </div>
         </div>
