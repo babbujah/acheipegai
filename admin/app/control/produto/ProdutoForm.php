@@ -136,7 +136,7 @@ class ProdutoForm extends TPage
             $data = $this->form->getData(); // get form data as array
             
             
-            $object = new Produto;  // create an empty object
+            $object = empty($data->id) ? new Produto : new Produto($data->id);  // create an empty object
             $object->fromArray( (array) $data); // load the object with data
             $object->store(); // save the object
             

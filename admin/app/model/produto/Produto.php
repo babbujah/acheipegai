@@ -41,6 +41,7 @@ class Produto extends TRecord{
         parent::store();
         if( empty($this->hash) ){
             $this->hash = FormatarDados::hash(6, '', $this->id);
+            parent::store();
         }
     }
     
