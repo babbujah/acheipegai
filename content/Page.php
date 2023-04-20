@@ -3,7 +3,6 @@
 class Page {
 
     protected $title = 'Achei Pegai';
-    protected $descricao = 'Descontos nas melhores lojas';
     protected $keywords = 'descontos pechincha preços produtos';
     protected $description = 'Descontos nas melhores lojas';
     protected $author = 'Julio Santos';
@@ -19,12 +18,8 @@ class Page {
         $this->loadContent();
     }
 
-    public function loadContent(){
+    protected function loadContent(){
         $this->content = '';
-    }
-
-    public function getContent(){
-        return $this->content;
     }
 
     public function set404(){
@@ -67,6 +62,11 @@ class Page {
         
         $layout = file_get_contents('layout.html');
         $layout = str_replace( '{TITLE}', $this->title, $layout );
+        
+        $layout = str_replace( '{KEYWORDS}', $this->keywords, $layout );
+        $layout = str_replace( '{DESCRIPTION}', $this->description, $layout );
+        $layout = str_replace( '{AUTHOR}', $this->author, $layout );
+        
         $layout = str_replace( '{OPTION_LOJAS}', $option_lojas, $layout );
         $layout = str_replace( '{MENU_CATEGORIAS}', $menu_categorias, $layout );
         $layout = str_replace( '{LIST_LOJAS}', $list_lojas, $layout );

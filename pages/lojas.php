@@ -4,7 +4,7 @@
 
         protected $title = 'Achei Pegai | Lojas';
 
-        public function loadContent(){
+        protected function loadContent(){
             $this->content = '
                 <div role="main" class="main">
 

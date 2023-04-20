@@ -2,21 +2,22 @@
 
     class Produto extends Page{
 
-        public function loadContent(){
-            $produto = $this->api->getProduto($this->params['id']);
+        protected function loadContent(){
+            $produto = $this->api->getProdutoByHash($this->params['code']);
 
-            if( empty($this->params['id']) || empty($produto) ){
+            if( empty($this->params['code']) || empty($produto) ){
                 $this->set404();
             }
             else{
                 $this->title.= ' | '.$produto->nome;
+                $this->description = $produto->descricao;
 
                 $this->content =  '
                     <div class="row">
                         <div class="col">
                             <ul class="breadcrumb breadcrumb-style-2 d-block text-4 mb-4">
                                 <li><a href="./" class="text-color-default text-color-hover-primary text-decoration-none">Principal</a></li>
-                                <li><a href="./" class="text-color-default text-color-hover-primary text-decoration-none">'.$produto->nome_categoria.'</a></li>
+                                <li><a href="./?categoria='.$produto->nome_categoria.'" class="text-color-default text-color-hover-primary text-decoration-none">'.$produto->nome_categoria.'</a></li>
                                 <li>'.$produto->nome.'</li>
                             </ul>
                         </div>
@@ -47,10 +48,16 @@
                     
                                 <ul class="list list-unstyled text-2">
                                     <li class="mb-0">LOJA: <strong class="text-color-dark">'.$produto->nome_loja.'</strong></li>
-                                    <li class="mb-0">SKU: <strong class="text-color-dark">'.$produto->id.'</strong></li>
+                                    <li class="mb-0">SKU: <strong class="text-color-dark">'.$produto->hash.'</strong></li>
                                 </ul>
 
                                 <a href="'.$produto->link_afiliado.'" class="btn btn-dark btn-modern text-uppercase bg-color-hover-primary border-color-hover-primary">PEGAI</a>
+
+                                <div class="shareon mt-4" data-url="'.URL_BASE.'produto?key='.$produto->id.'">
+                                    <a class="telegram"></a>
+                                    <a class="whatsapp"></a>
+                                    <a class="copy-url"></a>
+                                </div>
                             </div>
                         </div>
                     </div>

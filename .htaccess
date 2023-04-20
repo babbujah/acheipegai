@@ -3,7 +3,7 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
 	
-    RewriteBase /proc/acheipegai/
+    #RewriteBase /acheipegai/
 
 	#Redirect for API
 	RewriteRule ^([0-9A-z_-]+)$ index.php?page=$1 [QSA,L]

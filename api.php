@@ -63,6 +63,22 @@ class Api{
         }
     }
 
+    public function getProdutoByHash($hash){
+        try{
+            $response = @file_get_contents(self::API_URL_BASE.'?class=ProdutoRestService&method=findProdutoByHash&hash='.$hash);
+            $return = json_decode($response);
+            
+            if( empty($return->data) || $return->status == 'error' ){
+                throw new Exception('Nenhum dado recebido.');
+            }
+
+            return $return->data;            
+        }
+        catch(Exception $e){
+            return null;
+        }
+    }
+
 }
 
 
