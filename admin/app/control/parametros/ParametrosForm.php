@@ -26,6 +26,7 @@ class ParametrosForm extends TPage
         $title = new TEntry('title');
         $description = new TEntry('description');
         $author = new TEntry('author');
+        $keywords = new TEntry('keywords');
         $social_whatsapp = new TEntry('social_whatsapp');
         $social_facebook = new TEntry('social_facebook');
         $social_instagram = new TEntry('social_instagram');
@@ -38,6 +39,7 @@ class ParametrosForm extends TPage
         $this->form->addFields( [ new TLabel('Título') ], [ $title ] );
         $this->form->addFields( [ new TLabel('Descrição') ], [ $description ] );
         $this->form->addFields( [ new TLabel('Autor') ], [ $author ] );
+        $this->form->addFields( [ new TLabel('Keywords') ], [$keywords] );
         $this->form->addFields( [ new TLabel('Whatsapp') ], [ $social_whatsapp ] );
         $this->form->addFields( [ new TLabel('Facebook') ], [ $social_facebook ] );
         $this->form->addFields( [ new TLabel('Instagram') ], [ $social_instagram ] );
@@ -51,6 +53,7 @@ class ParametrosForm extends TPage
         $title->setSize('100%');
         $description->setSize('100%');
         $author->setSize('100%');
+        $keywords->setSize('100%');
         $social_whatsapp->setSize('100%');
         $social_facebook->setSize('100%');
         $social_instagram->setSize('100%');
