@@ -24,7 +24,7 @@ class Parametros extends TRecord
         parent::addAttribute('social_instagram');
         parent::addAttribute('social_email');
         parent::addAttribute('social_telegram');
-        parant::addAttribute('keywords');
+        parent::addAttribute('keywords');
     }
 
 
