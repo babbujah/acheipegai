@@ -132,6 +132,10 @@
     <action>ProdutoList</action>
     <icon>fas:shopping-bag fa-fw</icon>
   </menuitem>
+  <menuitem label="Configurações">
+    <action>ParametrosForm</action>
+    <icon>fas:cogs fa-fw</icon>
+  </menuitem>
   <menuitem label="Logout">
     <action>LoginForm#method=onLogout#static=1</action>
     <icon>fas:sign-out-alt fa-fw</icon>
