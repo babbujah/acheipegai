@@ -5,7 +5,8 @@ class Page {
     protected $title = 'Achei Pegai';
     protected $keywords = 'descontos pechincha preços produtos';
     protected $description = 'Descontos nas melhores lojas';
-    protected $author = 'Julio Santos';
+    protected $author = 'AcheiPegai Development Team';
+    protected $metas = [];
 
     protected $params;
     protected $content;
@@ -20,6 +21,10 @@ class Page {
 
     protected function loadContent(){
         $this->content = '';
+    }
+
+    protected function addMeta($property, $content){
+        $this->metas[$property] = $content;     
     }
 
     public function set404(){
@@ -41,6 +46,7 @@ class Page {
         $option_lojas = '';
         $menu_categorias = '';
         $list_lojas = '';
+        $meta = '';
 
         foreach($this->api->getLojas() as $loja){
             $option_lojas.= '<option value="'.$loja->nome.'">'.$loja->nome.'</option>';
@@ -59,14 +65,21 @@ class Page {
         foreach( $this->api->getLojas() as $loja ){
             $list_lojas.= '<li class="list-inline-item"><a href="'.$loja->link_afiliado.'" class="badge badge-dark rounded border border-color-light-3 font-weight-normal text-2 p-2">'.$loja->nome.'</a></li>';
         }
+
+        foreach( $this->metas as $property => $content ){
+            $meta.= '<meta property="'.$property.'" content="'.$content.'"/>';
+        }
         
         $layout = file_get_contents('layout.html');
-        $layout = str_replace( '{TITLE}', $this->title, $layout );
         
+        // Meta tags & Social
+        $layout = str_replace( '{TITLE}', $this->title, $layout );
         $layout = str_replace( '{KEYWORDS}', $this->keywords, $layout );
         $layout = str_replace( '{DESCRIPTION}', $this->description, $layout );
         $layout = str_replace( '{AUTHOR}', $this->author, $layout );
+        $layout = str_replace( '{META}', $meta, $layout );
         
+        // Conteúdo dinâmico da loja
         $layout = str_replace( '{OPTION_LOJAS}', $option_lojas, $layout );
         $layout = str_replace( '{MENU_CATEGORIAS}', $menu_categorias, $layout );
         $layout = str_replace( '{LIST_LOJAS}', $list_lojas, $layout );

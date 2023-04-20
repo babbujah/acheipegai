@@ -11,6 +11,19 @@
             else{
                 $this->title.= ' | '.$produto->nome;
                 $this->description = $produto->descricao;
+                
+                $this->addMeta('og:title', $this->title);
+                $this->addMeta('og:type', 'website');
+                $this->addMeta('og:description', $produto->descricao);
+                $this->addMeta('og:image', URL_BASE.str_replace('./', '', $produto->foto));
+                $this->addMeta('og:image:width', '200');
+                $this->addMeta('og:image:height', '200');
+                $this->addMeta('og:url', URL_BASE.'produto?code='.$produto->hash);
+                $this->addMeta('og:site_name', 'ACHEI PEGAI');
+                $this->addMeta('twitter:title', $this->title);
+                $this->addMeta('twitter:url', URL_BASE.'produto?code='.$produto->hash);
+                $this->addMeta('twitter:description', $produto->descricao);
+                $this->addMeta('twitter:image', URL_BASE.str_replace('./', '', $produto->foto));
 
                 $this->content =  '
                     <div class="row">
@@ -53,7 +66,7 @@
 
                                 <a href="'.$produto->link_afiliado.'" class="btn btn-dark btn-modern text-uppercase bg-color-hover-primary border-color-hover-primary">PEGAI</a>
 
-                                <div class="shareon mt-4" data-url="'.URL_BASE.'produto?key='.$produto->id.'">
+                                <div class="shareon mt-4" data-url="'.URL_BASE.'produto?code='.$produto->hash.'">
                                     <a class="telegram"></a>
                                     <a class="whatsapp"></a>
                                     <a class="copy-url"></a>

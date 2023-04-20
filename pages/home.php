@@ -56,7 +56,7 @@
 					<div class="col-12 col-sm-6 col-lg-3">
 						<div class="product mb-0" style="background: #fff; border-radius: 7px;">
 							<div class="product-thumb-info border-0 mb-3">								
-							<a href="'.$produto->link_afiliado.'" class="quick-view text-uppercase font-weight-semibold text-2" onclick="location.href=\'shop-product-sidebar-left.html\'">
+							<a href="'.$produto->link_afiliado.'" class="quick-view text-uppercase font-weight-semibold text-2" onclick="location.href=\''.$produto->link_afiliado.'\'">
 								Pegai!
 								</a>
 								<a href="produto?code='.$produto->hash.'">
