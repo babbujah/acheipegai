@@ -2,10 +2,16 @@
 
 class Page {
 
-    protected $title = 'Achei Pegai';
-    protected $keywords = 'descontos pechincha preços produtos';
-    protected $description = 'Descontos nas melhores lojas';
-    protected $author = 'AcheiPegai Development Team';
+    protected $title;
+    protected $keywords;
+    protected $description;
+    protected $author;
+    protected $social_whatsapp;
+    protected $social_facebook;
+    protected $social_instagram;
+    protected $social_email;
+    protected $social_telegram;
+
     protected $metas = [];
 
     protected $params;
@@ -17,6 +23,18 @@ class Page {
         $this->api = new Api; 
 
         $this->loadContent();
+
+        $parametros = $this->api->getParametros();
+
+        $this->title = $parametros->title;
+        $this->keywords = $parametros->keywords;
+        $this->description = $parametros->description;
+        $this->author = $parametros->author;
+        $this->social_whatsapp = $parametros->social_whatsapp;
+        $this->social_facebook = $parametros->social_facebook;
+        $this->social_instagram = $parametros->social_instagram;
+        $this->social_email = $parametros->social_email;
+        $this->social_telegram = $parametros->social_telegram;
     }
 
     protected function loadContent(){
@@ -78,6 +96,11 @@ class Page {
         $layout = str_replace( '{DESCRIPTION}', $this->description, $layout );
         $layout = str_replace( '{AUTHOR}', $this->author, $layout );
         $layout = str_replace( '{META}', $meta, $layout );
+        $layout = str_replace( '{SOCIAL_FACEBOOK}', $this->social_facebook, $layout );
+        $layout = str_replace( '{SOCIAL_WHATSAPP}', $this->social_whatsapp, $layout );
+        $layout = str_replace( '{SOCIAL_INSTAGRAM}', $this->social_instagram, $layout );
+        $layout = str_replace( '{SOCIAL_EMAIL}', $this->social_email, $layout );
+        $layout = str_replace( '{SOCIAL_TELEGRAM}', $this->social_telegram, $layout );
         
         // Conteúdo dinâmico da loja
         $layout = str_replace( '{OPTION_LOJAS}', $option_lojas, $layout );

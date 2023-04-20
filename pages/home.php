@@ -59,7 +59,7 @@
 							<a href="'.$produto->link_afiliado.'" class="quick-view text-uppercase font-weight-semibold text-2" onclick="location.href=\''.$produto->link_afiliado.'\'">
 								Pegai!
 								</a>
-								<a href="produto?code='.$produto->hash.'">
+								<a href="'.$produto->link_afiliado.'">
 									<div class="product-thumb-info-image">
 										<img alt="" class="img-fluid" src="'.$produto->foto.'" style="width: 100%; height: 250px" onerror="this.onerror=null;this.src=\'./img/produtos/noimage.png\';">										
 									</div>
@@ -69,7 +69,7 @@
 								<div class="p-2">
 									<a href="#" class="d-block text-uppercase text-decoration-none text-color-default text-color-hover-primary line-height-1 text-0 mb-1">'.$produto->nome_loja.'</a>
 									<h3 class="text-3-5 font-weight-medium font-alternative text-transform-none line-height-3 mb-0">
-									<a href="produto?code='.$produto->hash.'" class="text-color-dark text-color-hover-primary">'.$produto->nome.'</a></h3>
+									<a href="'.$produto->link_afiliado.'" class="text-color-dark text-color-hover-primary">'.$produto->nome.'</a></h3>
 								</div>
 								<a href="#" class="text-decoration-none text-color-default text-color-hover-dark text-4 p-2">
 									<i class="fas fa-share text-primary d-none"></i>

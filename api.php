@@ -4,9 +4,23 @@ class Api{
 
     const API_URL_BASE = URL_BASE.'admin/rest.php';
 
+    private $parametros;
     private $lojas;
     private $categorias;
     private $produtos;
+
+    public function getParametros(){
+        try{
+            if( empty($this->parametros) ){
+                $response = file_get_contents(self::API_URL_BASE.'?class=ParametrosRestService&method=load');
+                $this->parametros = json_decode($response)->data;
+            }
+            return $this->parametros;
+        }
+        catch(Exception $e){
+            return [];
+        }
+    }
 
     public function getLojas(){
         try{
