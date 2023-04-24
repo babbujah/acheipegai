@@ -123,9 +123,11 @@ class ProdutoList extends TPage
         
         $action1 = new TDataGridAction(['ProdutoForm', 'onEdit'], ['id'=>'{id}']);
         $action2 = new TDataGridAction([$this, 'onDelete'], ['id'=>'{id}']);
+        $action3 = new TDataGridAction([$this, 'shareTemplates'], ['id'=>'{id}']);
         
         $this->datagrid->addAction($action1, _t('Edit'),   'far:edit blue');
         $this->datagrid->addAction($action2 ,_t('Delete'), 'far:trash-alt red');
+        $this->datagrid->addAction($action3 ,'', 'fa:share orange');
         
         // desabilita a função padrão de clique para edição do registro
         $this->datagrid->disableDefaultClick();
@@ -140,6 +142,7 @@ class ProdutoList extends TPage
         $tr = new TElement('tr');
         $this->datagrid->prependRow($tr);
         
+        $tr->add( TElement::tag('td', ''));
         $tr->add( TElement::tag('td', ''));
         $tr->add( TElement::tag('td', ''));
         $tr->add( TElement::tag('td', $id));
@@ -191,5 +194,36 @@ class ProdutoList extends TPage
         $container->add($panel);
         
         parent::add($container);
+    }
+    
+    public static function shareTemplates( $param ){
+        
+        if( !empty($param['id']) ){
+            TTransaction::open('acheipegai');
+    
+            $key = $param['id'];
+            $produto = new Produto($key);
+            
+            $repo = new TRepository('ShareTemplate');
+            $share_templates = $repo->load();
+            var_dump($share_templates);
+            
+            $html = TElement::tag('div', '', ['class' => 'row']);
+    
+            foreach( $share_templates as $template ){
+                $content = str_replace('{NOME}', $produto->nome, $template->content);
+                $content = str_replace('{DESCRICAO}', $produto->descricao, $content );
+                $content = str_replace('{PRECO}', $produto->preco, $content);
+                $content = str_replace('{URL}', $produto->url ,$content);
+    
+                $html->add( TElement::tag('div', $content, ['class' => 'col-md-6']) );
+            }
+            
+            $window = TWindow::create('Templates de compartilhamento', 0.6, 0.6);
+            $window->add($html);
+            $window->show();
+    
+            TTransaction::close();
+        }    
     }
 }
