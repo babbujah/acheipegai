@@ -172,7 +172,7 @@ class ProdutoList extends TPage
         // create the page navigation
         $this->pageNavigation = new TPageNavigation;
         $this->pageNavigation->setAction(new TAction([$this, 'onReload']));
-        //$this->pageNavigation->setProperties(['text-align:center']); // VERIFICAR ALINHAMENTO
+        //$this->pageNavigation->setProperties('style', ['text-align' => 'center']); // VERIFICAR ALINHAMENTO
         
         $panel = new TPanelGroup('Produto');
         $panel->add($this->form);
