@@ -5,6 +5,7 @@
  */
 class ShareTemplateForm extends TPage
 {
+    protected $datagrid;
     protected $form; // form
     
     /**
@@ -14,6 +15,15 @@ class ShareTemplateForm extends TPage
     public function __construct( $param )
     {
         parent::__construct();
+        
+        
+       
+        
+        $this->datagrid = new BootstrapDatagridWrapper( new TDataGrid() );
+        $this->datagrid->width = '100%';
+        
+        $col_valor = new TDataGridColumn( 'valor', 'Valor', 'left' );
+        $col_descricao = new TDataGridColumn( 'descricao', 'Descrição', 'left' );
         
         
         // creates the form

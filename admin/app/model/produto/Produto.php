@@ -64,6 +64,6 @@ class Produto extends TRecord{
     }
     
     public function get_url(){
-        return URL_BASE.'?code='.$this->hash;
+        return URL_BASE.'produto?code='.$this->hash;
     }
 }

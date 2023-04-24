@@ -123,7 +123,7 @@ class ProdutoList extends TPage
         
         $action1 = new TDataGridAction(['ProdutoForm', 'onEdit'], ['id'=>'{id}']);
         $action2 = new TDataGridAction([$this, 'onDelete'], ['id'=>'{id}']);
-        $action3 = new TDataGridAction([$this, 'shareTemplates'], ['id'=>'{id}']);
+        $action3 = new TDataGridAction([$this, 'exibirTemplatesCompartilhamento'], ['id'=>'{id}']);
         
         $this->datagrid->addAction($action1, _t('Edit'),   'far:edit blue');
         $this->datagrid->addAction($action2 ,_t('Delete'), 'far:trash-alt red');
@@ -172,6 +172,7 @@ class ProdutoList extends TPage
         // create the page navigation
         $this->pageNavigation = new TPageNavigation;
         $this->pageNavigation->setAction(new TAction([$this, 'onReload']));
+        //$this->pageNavigation->setProperties(['text-align:center']); // VERIFICAR ALINHAMENTO
         
         $panel = new TPanelGroup('Produto');
         $panel->add($this->form);
@@ -187,6 +188,8 @@ class ProdutoList extends TPage
         
         $panel->addHeaderActionLink( _t('New'),  new TAction(['ProdutoForm', 'onEdit'], ['register_state' => 'false']), 'fa:plus green' );
         
+        $panel->addHeaderActionLink( 'Criar Novos Templates de Compartilhamento', new TAction( [$this, 'novoShareTemplate'] , ['register_state' => 'false', 'static' => '1'] ), 'fa:plus green');
+        
         // vertical box container
         $container = new TVBox;
         $container->style = 'width: 100%';
@@ -196,7 +199,11 @@ class ProdutoList extends TPage
         parent::add($container);
     }
     
-    public static function shareTemplates( $param ){
+    public static function novoShareTemplate( $param ){
+        TApplication::executeMethod('ShareTemplateForm'); 
+    }
+    
+    public static function exibirTemplatesCompartilhamento( $param ){
         
         if( !empty($param['id']) ){
             TTransaction::open('acheipegai');
@@ -206,7 +213,7 @@ class ProdutoList extends TPage
             
             $repo = new TRepository('ShareTemplate');
             $share_templates = $repo->load();
-            var_dump($share_templates);
+            //var_dump($share_templates);
             
             $html = TElement::tag('div', '', ['class' => 'row']);
     
