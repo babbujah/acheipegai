@@ -4,7 +4,7 @@
 
         protected function loadContent(){
             $produto = $this->api->getProdutoByHash($this->params['code']);
-
+            
             if( empty($this->params['code']) || empty($produto) ){
                 $this->set404();
             }
