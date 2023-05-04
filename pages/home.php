@@ -2,6 +2,8 @@
 
 	class Home extends Page{
 		
+		private $items_per_page = 20;
+
 		public function loadContent(){
 			$this->title.= ' | Home';
 			
@@ -37,10 +39,13 @@
 			}
 
 			$this->content.= '
-				<div class="masonry-loader masonry-loader-showing" style="min-height: 10rem;">
-					<div class="row products product-thumb-info-list" data-plugin-masonry data-plugin-options="{\'layoutMode\': \'fitRows\'}">
+				<div  style="min-height: 10rem;">
+					<div class="row products product-thumb-info-list" >
 			';
 			
+			$page = 1;
+			$items_add = 0;
+						
 			foreach ($this->api->getProdutos() as $produto) {
 				if( !empty($this->params['categoria']) && $produto->nome_categoria != $this->params['categoria']){
 					continue;	
@@ -52,8 +57,10 @@
 					continue;	
 				}
 				
+				$display = $page == 1 ? '' : 'd-none';
+				
 				$this->content.= '
-					<div class="col-12 col-sm-6 col-lg-3">
+					<div class="col-12 col-sm-6 col-lg-3 page-'.$page.' '.$display.'">
 						<div class="product mb-0" style="background: #fff; border-radius: 7px;">
 							<div class="product-thumb-info border-0 mb-3">								
 							<a href="'.$produto->link_afiliado.'" class="quick-view text-uppercase font-weight-semibold text-2" onclick="location.href=\''.$produto->link_afiliado.'\'">
@@ -68,7 +75,7 @@
 							<div class="d-flex justify-content-between">
 								<div class="p-2">
 									<a href="#" class="d-block text-uppercase text-decoration-none text-color-default text-color-hover-primary line-height-1 text-0 mb-1">'.$produto->nome_loja.'</a>
-									<h3 class="text-3-5 font-weight-medium font-alternative text-transform-none line-height-3 mb-0">
+									<h3 class="text-3-5 font-weight-medium font-alternative text-transform-none line-height-3 mb-0" style="min-height: 3rem!important">
 									<a href="produto?code='.$produto->hash.'" class="text-color-dark text-color-hover-primary">'.$produto->nome.'</a></h3>
 								</div>
 								<a href="#" class="text-decoration-none text-color-default text-color-hover-dark text-4 p-2">
@@ -84,9 +91,41 @@
 						</div>
 					</div>
 				';
+
+				$items_add++;
+
+				if( $items_add == $this->items_per_page){
+					$page++;
+					$items_add = 0;
+				}			
+
 			}
 
 			$this->content.= '</div></div>';
+
+			if( $page > 1 ){
+				$this->content.= '
+					<div class="row">
+						<button class="btn btn-default" id="showpage" onclick="showPage()" pagenumber="2">Mostrar mais...</button>
+					</div>
+				';
+			}
+
+			$this->content.= '
+				<script>
+					function showPage(){
+						var pagenumber = parseInt($("#showpage").attr("pagenumber"));
+						var pagenext = pagenumber + 1;
+
+						$(".page-"+pagenumber).removeClass("d-none");
+						$("#showpage").attr("pagenumber", pagenext);
+						
+						if( $(".page-"+pagenext).length == 0 ){
+							$("#showpage").remove();	
+						}
+					}
+				</script>
+			';
 		}
 
 	}
