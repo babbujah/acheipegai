@@ -13,7 +13,7 @@ class FormatarDados{
      * @param $row linha do formulário.
      * @author brunosilva 
     **/
-    public static function formatarMoeda( $valor, $object, $row ){
+    public static function formatarMoeda( $valor ){
         $valorFormatado = number_format( $valor, 2, ',', '.' );
         
         $valorFormatado = "R$ ". $valorFormatado;
@@ -28,7 +28,7 @@ class FormatarDados{
      * @param $row linha do formulário.
      * @author brunosilva 
     **/
-    public static function formatarImagem( $imagem, $object, $row ){
+    public static function formatarImagem( $imagem ){
         
         $capturaImagem = $imagem;
         if( empty($capturaImagem) ){
@@ -53,7 +53,7 @@ class FormatarDados{
      * @param $row linha do formulário.
      * @author brunosilva 
     **/
-    public static function formatarLink( $url, $object, $row ){
+    public static function formatarLink( $url ){
         
         return TElement::tag( 'a', 'Clique para acessar', ['href' => $url ] );
     }

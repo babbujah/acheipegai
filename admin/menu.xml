@@ -132,6 +132,10 @@
     <action>ProdutoList</action>
     <icon>fas:shopping-bag fa-fw</icon>
   </menuitem>
+  <menuitem label="Templates de compartilhamento">
+    <action>ShareTemplateForm</action>
+    <icon>far:share-square fa-fw</icon>
+  </menuitem>
   <menuitem label="Configurações">
     <action>ParametrosForm</action>
     <icon>fas:cogs fa-fw</icon>

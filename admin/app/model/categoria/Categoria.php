@@ -9,9 +9,7 @@ class Categoria extends TRecord{
     const TABLENAME = 'categoria';
     const PRIMARYKEY = 'id';
     const IDPOLICE = 'serial';
-    
-    private $nome;
-    
+        
     /**
     * Método Construtor
     **/
@@ -19,5 +17,21 @@ class Categoria extends TRecord{
         parent::__construct($id, $callObjectLoad);
         
         parent::addAttribute('nome');
+    }
+    
+    public static function saveByNome($nome){
+        $categoria = self::where('nome', '=', $nome)->first();
+        
+        if( !$categoria instanceof Categoria ){
+        
+            $categoria = new Categoria;
+            $categoria->nome = $nome;
+            
+            $categoria->store();
+            
+        }    
+        
+        
+        return $categoria;
     }
 }

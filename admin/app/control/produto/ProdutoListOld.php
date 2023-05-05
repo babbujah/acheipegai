@@ -5,7 +5,7 @@
  * @package    control/produto
  * @author     brunosilva
  */
-class ProdutoList extends TPage
+class ProdutoListOld extends TPage
 {
     protected $form;     // registration form
     protected $datagrid; // listing
@@ -197,24 +197,6 @@ class ProdutoList extends TPage
         $container->add($panel);
         
         parent::add($container);
-        
-        TScript::create( "
-            function copiarConteudo( containerid ){
-                if (document.selection) {
-                    var range = document.body.createTextRange();
-                    range.moveToElementText(document.getElementById(containerid));
-                    range.select().createTextRange();
-                    document.execCommand('copy');
-                } else if (window.getSelection) {
-                    var range = document.createRange();
-                    range.selectNode(document.getElementById(containerid));
-                    window.getSelection().addRange(range);
-                    document.execCommand('copy');
-                    alert('Template copiado com sucesso.');
-                 }
-            }
-            
-        " );
     }
     
     public static function novoShareTemplate( $param ){
@@ -236,29 +218,13 @@ class ProdutoList extends TPage
             $html = TElement::tag('div', '', ['class' => 'row']);
     
             foreach( $share_templates as $template ){
-                               
                 $content = str_replace('{NOME}', $produto->nome, $template->content);
                 $content = str_replace('{DESCRICAO}', $produto->descricao, $content );
                 $content = str_replace('{PRECO}', FormatarDados::formatarMoeda($produto->preco), $content);
                 $content = str_replace('{URL}', $produto->url ,$content);
-        
-                $div = TElement::tag('div', '', ['class' => 'col-md-6', 'style' => 'border-width: 0 1px 1px 0; border-style: solid; border-color:gray; padding:1rem']);
-                $div->add( TElement::tag('div', $content, ['id' => 'template-'.$template->id]) );
-                $div->add(
-                    TElement::tag(
-                        'button',
-                        TElement::tag('i', '', ['class' => 'fa fa-copy']),
-                            ['class' => 'btn btn-info',
-                             'title' => '', 
-                             'data-original-title' => 'Copiar',
-                             'onclick' => "copiarConteudo('template-{$template->id}')"
-                            ]
-                        )
-                );
-                $html->add( $div );
+    
+                $html->add( TElement::tag('div', $content, ['class' => 'col-md-6']) );
             }
-            
-            
             
             $window = TWindow::create('Templates de compartilhamento', 0.6, 0.6);
             $window->add($html);
